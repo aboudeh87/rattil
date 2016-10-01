@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed9df8b872992035f068a7fe461a635a",
-    "content-hash": "76036da3b5b55b91dbe1e1affa01bf9e",
+    "hash": "c4d4d74f75ffeeb802bb1833e990378f",
+    "content-hash": "1552c6db080abc31cc0af6abca78a5b2",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -160,6 +160,51 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "geniusts/roles",
+            "version": "3.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeniusTS/roles.git",
+                "reference": "510970bfb3ebbfa096e26547877ed7280d86f2a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeniusTS/roles/zipball/510970bfb3ebbfa096e26547877ed7280d86f2a4",
+                "reference": "510970bfb3ebbfa096e26547877ed7280d86f2a4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.3",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeniusTS\\Roles\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AbdulKader Zein Eddin",
+                    "email": "aboudeh1987@gmail.com"
+                }
+            ],
+            "description": "Powerful package for handling roles and permissions in Laravel 5.3",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "time": "2016-09-18 21:37:05"
         },
         {
             "name": "jakub-onderka/php-console-color",
