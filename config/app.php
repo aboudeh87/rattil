@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         \GeniusTS\Roles\RolesServiceProvider::class,
+        \Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
