@@ -44,17 +44,7 @@ class SocialMediaController extends Controller
         $this->account = Socialite::driver($provider)->user();
         $this->provider = $provider;
 
-        if ($this->checkIfSocialAccountExist())
-        {
-            return $this->loginSocialAccount();
-        }
-
-        if ($this->checkIfEmailExists($this->account->getEmail()))
-        {
-            return $this->connectSocialAccount();
-        }
-
-        return $this->registerNewUser();
+        return $this->socialAccountProcess();
     }
 
     /**

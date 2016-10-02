@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Auth\V1;
 
 
 use Auth;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Traits\ApiLoginUser;
 use App\Traits\AuthenticatesUsers;
 use Illuminate\Support\Facades\Lang;
 use App\Http\Controllers\Api\V1\ApiController;
@@ -27,7 +27,7 @@ class LoginController extends ApiController
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ApiLoginUser;
 
     /**
      * Create a new controller instance.
@@ -66,42 +66,6 @@ class LoginController extends ApiController
         $this->clearApiToken($this->guard()->user());
 
         return $this->respondSuccess('تم تسجيل الخروج بنجاح.');
-    }
-
-    /**
-     * The user has been authenticated.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  mixed                    $user
-     *
-     * @return mixed
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        $this->createAnApiToken($user);
-
-        return $this->respond([
-            'success' => true,
-            'message' => 'تم تسجيل الدخول بنجاح',
-            'user'    => [
-                'id'       => $user->id,
-                'name'     => $user->name,
-                'username' => $user->username,
-                'email'    => $user->email,
-                'token'    => $user->api_token,
-            ],
-        ]);
-    }
-
-    /**
-     * Create a new API token for user
-     *
-     * @param $user
-     */
-    protected function createAnApiToken(&$user)
-    {
-        $user->api_token = Str::random(60);
-        $user->save();
     }
 
     /**

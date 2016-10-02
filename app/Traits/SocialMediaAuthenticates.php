@@ -54,6 +54,26 @@ trait SocialMediaAuthenticates
     protected $guard = null;
 
     /**
+     * Processing the social media authentication request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function socialAccountProcess()
+    {
+        if ($this->checkIfSocialAccountExist())
+        {
+            return $this->loginSocialAccount();
+        }
+
+        if ($this->checkIfEmailExists($this->account->getEmail()))
+        {
+            return $this->connectSocialAccount();
+        }
+
+        return $this->registerNewUser();
+    }
+
+    /**
      * Login the user that related to the social account
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -158,13 +178,6 @@ trait SocialMediaAuthenticates
     }
 
     /**
-     * Return login successfully response
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    abstract protected function respondLoginSuccess();
-
-    /**
      * Check if the social media account exists
      *
      * @return bool
@@ -213,4 +226,10 @@ trait SocialMediaAuthenticates
         return \Auth::guard($guard);
     }
 
+    /**
+     * Return login successfully response
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    abstract protected function respondLoginSuccess();
 }
