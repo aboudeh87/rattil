@@ -22,8 +22,12 @@ Route::group([
     'prefix' => '/v1',
 ], function ()
 {
+    //--------------------------------------------------------|
+    //                  Authentication routes                 |
+    //--------------------------------------------------------|
     Route::post('/login', 'Api\Auth\V1\LoginController@login');
     Route::get('/logout', 'Api\Auth\V1\LoginController@logout');
     Route::post('/register', 'Api\Auth\V1\RegisterController@register');
     Route::post('password/email', 'Api\Auth\V1\ForgotPasswordController@sendResetLinkEmail');
+
 });
