@@ -29,5 +29,4 @@ Route::group([
     Route::get('/logout', 'Api\Auth\V1\LoginController@logout');
     Route::post('/register', 'Api\Auth\V1\RegisterController@register');
     Route::post('password/email', 'Api\Auth\V1\ForgotPasswordController@sendResetLinkEmail');
-
 });

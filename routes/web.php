@@ -20,4 +20,10 @@ Route::get('/', function ()
 
 Auth::routes();
 
+//--------------------------------------------------------|
+//           Social Media Authentication routes           |
+//--------------------------------------------------------|
+Route::get('/social/{provider}', 'Auth\SocialMediaController@redirectToProvider');
+Route::get('/social/{provider}/callback', 'Auth\SocialMediaController@handleProviderCallback');
+
 Route::get('/home', 'HomeController@index');
