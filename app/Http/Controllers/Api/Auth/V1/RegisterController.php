@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth\V1;
 
 
 use App\Traits\RegistersUsers;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\V1\ApiController;
 
 /**
  * Class RegisterController
  */
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
 
     /*
@@ -26,19 +26,22 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:api');
+    }
+
+    /**
+     * The response after the user registered success
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function registeredSuccessResponse()
+    {
+        return $this->respondSuccess('لقد تم تسجيلك بنجاح');
     }
 }
