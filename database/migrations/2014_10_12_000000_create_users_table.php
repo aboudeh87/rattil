@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
         {
             $table->increments('id');
             $table->string('name');
-            $table->string('username', 254)->unique()->nulalble();
-            $table->string('email', 254)->unique()->nulalble();
+            $table->string('username', 254)->unique()->nulalble()->default(null);
+            $table->string('email', 254)->unique()->nulalble()->default(null);
             $table->string('password');
             $table->rememberToken();
             $table->string('api_token', 100)->nullable();
