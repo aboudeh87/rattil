@@ -150,6 +150,7 @@ trait SocialMediaAuthenticates
     {
         $this->user = User::create([
             'name'     => $this->account->getName(),
+            'username' => null,
             'email'    => $this->account->getEmail() ?: null,
             'avatar'   => $this->account->getAvatar() ?: null,
             'password' => bcrypt(str_random(10)),
