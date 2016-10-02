@@ -33,4 +33,12 @@ class User extends Authenticatable
         'remember_token',
         'api_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function socials()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
 }
