@@ -18,14 +18,14 @@ class CreateSuwarContentTable extends Migration
         {
             $table->increments('id');
             $table->integer('sura_id', false, true);
-            $table->string('language', 2);
+            $table->string('language_key', 2);
             $table->string('name', 255);
             $table->text('definition')->nullable();
             $table->timestamps();
 
-            $table->unique(['sura_id', 'language']);
+            $table->unique(['sura_id', 'language_key']);
             $table->foreign('sura_id')->references('id')->on('suwar')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign('language')->references('key')->on('languages')->onUpdate('CASCADE')->onDelete('RESTRICT');
+            $table->foreign('language_key')->references('key')->on('languages')->onUpdate('CASCADE')->onDelete('RESTRICT');
         });
     }
 
