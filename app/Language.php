@@ -6,7 +6,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Language
+ * App\Language
+ *
+ * @mixin \Eloquent
  */
 class Language extends Model
 {
