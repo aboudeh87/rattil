@@ -27,7 +27,10 @@ class LoginController extends ApiController
     |
     */
 
-    use AuthenticatesUsers, ApiLoginUser;
+    use AuthenticatesUsers, ApiLoginUser
+    {
+        ApiLoginUser::authenticated insteadof AuthenticatesUsers;
+    }
 
     /**
      * Create a new controller instance.
@@ -63,7 +66,7 @@ class LoginController extends ApiController
      */
     public function logout(Request $request)
     {
-        $this->clearApiToken($this->guard()->user());
+        $this->clearApiToken($this->guard('api')->user());
 
         return $this->respondSuccess('تم تسجيل الخروج بنجاح.');
     }
@@ -77,6 +80,24 @@ class LoginController extends ApiController
     {
         $user->api_token = null;
         $user->save();
+    }
+
+    /**
+     * Redirect the user after determining they are locked out.
+     *
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function sendLockoutResponse(Request $request)
+    {
+        $seconds = $this->limiter()->availableIn(
+            $this->throttleKey($request)
+        );
+
+        $message = Lang::get('auth.throttle', ['seconds' => $seconds]);
+
+        return $this->respondError($message);
     }
 
     /**
@@ -94,11 +115,13 @@ class LoginController extends ApiController
     /**
      * Get the guard to be used during authentication.
      *
+     * @param string|null $guard
+     *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
-    protected function guard()
+    protected function guard($guard = null)
     {
-        return Auth::guard('api');
+        return Auth::guard($guard);
     }
 
 }
