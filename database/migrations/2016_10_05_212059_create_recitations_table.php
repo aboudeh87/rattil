@@ -26,8 +26,10 @@ class CreateRecitationsTable extends Migration
             $table->text('description', 255)->nullable();
             $table->text('url', 255);
             $table->string('length', 50)->nullable();
-            $table->softDeletes();
+            $table->boolean('verified')->default(false);
+            $table->boolean('disabled')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('RESTRICT');
             $table->foreign('sura_id')->references('id')->on('suwar')->onUpdate('CASCADE')->onDelete('RESTRICT');
