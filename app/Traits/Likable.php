@@ -3,6 +3,8 @@
 namespace App\Traits;
 
 
+use App\Like;
+
 /**
  * Class Likable
  *
@@ -18,6 +20,6 @@ trait Likable
      */
     public function likes()
     {
-        return $this->morphMany(Li);
+        return $this->morphMany(Like::class, 'likable');
     }
 }
