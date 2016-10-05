@@ -10,26 +10,27 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Recitation
  *
- * @property integer             $id
- * @property integer             $user_id
- * @property integer             $sura_id
- * @property integer             $narration_id
- * @property integer             $from_verse
- * @property integer             $to_verse
- * @property string              $slug
- * @property string              $description
- * @property string              $url
- * @property string              $length
- * @property boolean             $verified
- * @property boolean             $disabled
- * @property \Carbon\Carbon      $created_at
- * @property \Carbon\Carbon      $updated_at
- * @property string              $deleted_at
- * @property-read \App\User      $user
- * @property-read \App\Sura      $sura
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $sura_id
+ * @property integer $narration_id
+ * @property integer $from_verse
+ * @property integer $to_verse
+ * @property string $slug
+ * @property string $description
+ * @property string $url
+ * @property string $length
+ * @property boolean $verified
+ * @property boolean $disabled
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $deleted_at
+ * @property-read \App\User $user
+ * @property-read \App\Sura $sura
  * @property-read \App\Narration $narration
- * @property-read \App\Verse     $fromVerse
- * @property-read \App\Verse     $toVerse
+ * @property-read \App\Verse $fromVerse
+ * @property-read \App\Verse $toVerse
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereSuraId($value)
