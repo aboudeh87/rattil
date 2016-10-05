@@ -18,7 +18,7 @@ trait Favoritable
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function favoritors()
+    public function favorators()
     {
         return $this->morphMany(Favorite::class, 'likable');
     }
