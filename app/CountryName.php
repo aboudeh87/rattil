@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\CountryName whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CountryName whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $language_key
+ * @method static \Illuminate\Database\Query\Builder|\App\CountryName whereLanguageKey($value)
  */
 class CountryName extends Model
 {
@@ -36,10 +38,10 @@ class CountryName extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'language_key'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function country()
     {

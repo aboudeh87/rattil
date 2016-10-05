@@ -49,7 +49,7 @@ class Verse extends Model
     protected $fillable = ['page', 'chapter', 'characters', 'number', 'text', 'clean_text'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function sura()
     {
