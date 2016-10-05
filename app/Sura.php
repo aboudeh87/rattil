@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Sura whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Sura whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Verse[] $verses
  */
 class Sura extends Model
 {
