@@ -9,19 +9,32 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * App\User
  *
- * @property integer $id
- * @property string $name
- * @property string $username
- * @property string $email
- * @property string $avatar
- * @property string $password
- * @property string $remember_token
- * @property string $api_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\SocialMedia[] $socials
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
+ * @property integer
+ *               $id
+ * @property string
+ *               $name
+ * @property string
+ *               $username
+ * @property string
+ *               $email
+ * @property string
+ *               $avatar
+ * @property string
+ *               $password
+ * @property string
+ *               $remember_token
+ * @property string
+ *               $api_token
+ * @property \Carbon\Carbon
+ *               $created_at
+ * @property \Carbon\Carbon
+ *               $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\SocialMedia[]
+ *                    $socials
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
+ *                $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUsername($value)
@@ -68,5 +81,35 @@ class User extends Authenticatable
     public function socials()
     {
         return $this->hasMany(SocialMedia::class);
+    }
+
+    /**
+     * Get comments of the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get likes of the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Get the favorites of the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }
