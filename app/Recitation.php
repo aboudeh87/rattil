@@ -49,6 +49,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereDeletedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorators
  */
 class Recitation extends Model implements LikableContract,
                                           FavoritableContract
