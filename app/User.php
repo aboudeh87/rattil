@@ -3,38 +3,32 @@
 namespace App;
 
 
+use App\Traits\Followable;
+use App\Contracts\FollowableContract;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\User
  *
- * @property integer
- *               $id
- * @property string
- *               $name
- * @property string
- *               $username
- * @property string
- *               $email
- * @property string
- *               $avatar
- * @property string
- *               $password
- * @property string
- *               $remember_token
- * @property string
- *               $api_token
- * @property \Carbon\Carbon
- *               $created_at
- * @property \Carbon\Carbon
- *               $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\SocialMedia[]
- *                    $socials
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $notifications
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[]
- *                $unreadNotifications
+ * @property integer $id
+ * @property string $name
+ * @property string $username
+ * @property string $email
+ * @property string $avatar
+ * @property string $password
+ * @property string $remember_token
+ * @property string $api_token
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\SocialMedia[] $socials
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorites
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Follow[] $following
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Follow[] $followers
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUsername($value)
@@ -47,10 +41,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements FollowableContract
 {
 
-    use Notifiable;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -111,5 +105,15 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    /**
+     * Get the followed models
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function following()
+    {
+        return $this->hasMany(Follow::class);
     }
 }
