@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('commentable_id', false, true);
             $table->text('text');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
