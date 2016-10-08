@@ -14,7 +14,7 @@ trait Commentable
 {
 
     /**
-     * get the users who comments the model
+     * get the comments on the model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

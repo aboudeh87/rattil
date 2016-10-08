@@ -3,7 +3,9 @@
 namespace App;
 
 
+use App\Contracts\CommentableContract;
 use App\Contracts\FavoritableContract;
+use App\Traits\Commentable;
 use App\Traits\Favoritable;
 use App\Traits\Likable;
 use App\Contracts\LikableContract;
@@ -12,27 +14,29 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Recitation
  *
- * @property integer                                                   $id
- * @property integer                                                   $user_id
- * @property integer                                                   $sura_id
- * @property integer                                                   $narration_id
- * @property integer                                                   $from_verse
- * @property integer                                                   $to_verse
- * @property string                                                    $slug
- * @property string                                                    $description
- * @property string                                                    $url
- * @property string                                                    $length
- * @property boolean                                                   $verified
- * @property boolean                                                   $disabled
- * @property \Carbon\Carbon                                            $created_at
- * @property \Carbon\Carbon                                            $updated_at
- * @property string                                                    $deleted_at
- * @property-read \App\User                                            $user
- * @property-read \App\Sura                                            $sura
- * @property-read \App\Narration                                       $narration
- * @property-read \App\Verse                                           $fromVerse
- * @property-read \App\Verse                                           $toVerse
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property integer                                                       $id
+ * @property integer                                                       $user_id
+ * @property integer                                                       $sura_id
+ * @property integer                                                       $narration_id
+ * @property integer                                                       $from_verse
+ * @property integer                                                       $to_verse
+ * @property string                                                        $slug
+ * @property string                                                        $description
+ * @property string                                                        $url
+ * @property string                                                        $length
+ * @property boolean                                                       $verified
+ * @property boolean                                                       $disabled
+ * @property \Carbon\Carbon                                                $created_at
+ * @property \Carbon\Carbon                                                $updated_at
+ * @property string                                                        $deleted_at
+ * @property-read \App\User                                                $user
+ * @property-read \App\Sura                                                $sura
+ * @property-read \App\Narration                                           $narration
+ * @property-read \App\Verse                                               $fromVerse
+ * @property-read \App\Verse                                               $toVerse
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[]     $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorators
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereSuraId($value)
@@ -49,13 +53,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereDeletedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorators
  */
 class Recitation extends Model implements LikableContract,
-                                          FavoritableContract
+                                          FavoritableContract,
+                                          CommentableContract
 {
 
-    use Likable, Favoritable;
+    use Likable, Favoritable, Commentable;
 
     /**
      * The table associated with the model.
@@ -80,6 +84,13 @@ class Recitation extends Model implements LikableContract,
         'url',
         'length',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
