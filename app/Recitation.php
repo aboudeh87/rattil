@@ -3,13 +3,14 @@
 namespace App;
 
 
-use App\Contracts\CommentableContract;
-use App\Contracts\FavoritableContract;
+use App\Traits\Likable;
 use App\Traits\Commentable;
 use App\Traits\Favoritable;
-use App\Traits\Likable;
 use App\Contracts\LikableContract;
+use App\Contracts\CommentableContract;
+use App\Contracts\FavoritableContract;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Recitation
@@ -59,7 +60,7 @@ class Recitation extends Model implements LikableContract,
                                           CommentableContract
 {
 
-    use Likable, Favoritable, Commentable;
+    use Likable, Favoritable, Commentable, SoftDeletes;
 
     /**
      * The table associated with the model.
