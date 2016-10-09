@@ -35,4 +35,17 @@ Route::group([
     //--------------------------------------------------------|
     Route::post('/social/{provider}', 'Api\Auth\V1\SocialMediaController@handleProviderCallback')
         ->where(['provider' => 'facebook']);
+
+    //--------------------------------------------------------|
+    //                        Suwar APIs                      |
+    //--------------------------------------------------------|
+    Route::group([
+        'prefix'     => '/suwar',
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::get('/', 'Api\V1\SuwarController@index');
+    });
 });
