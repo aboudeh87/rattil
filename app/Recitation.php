@@ -37,7 +37,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Verse                                               $toVerse
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[]     $likes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorators
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[]  $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $mentions
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Recitation whereSuraId($value)
@@ -115,6 +116,14 @@ class Recitation extends Model implements LikableContract,
     public function narration()
     {
         return $this->belongsTo(Narration::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function mentions()
+    {
+        return $this->belongsToMany(User::class, 'mentions')->withTimestamps();
     }
 
     /**
