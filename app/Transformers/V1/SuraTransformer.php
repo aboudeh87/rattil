@@ -4,9 +4,9 @@ namespace App\Transformers\V1;
 
 
 use App\Sura;
+use App\Verse;
 use App\SuraContent;
 use App\Transformers\Transformer;
-use App\Verse;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,7 +34,7 @@ class SuraTransformer extends Transformer
             ->whereLanguageKey(\App::getLocale())
             ->first() ?: SuraContent::whereSuraId($model->id)->first();
 
-        $verses = $model->verses()->orderBy('number', 'asc')->map(function (Verse $verse)
+        $verses = $model->verses()->orderBy('number', 'asc')->get()->map(function (Verse $verse)
         {
             return [
                 'id'         => (int) $verse->id,
@@ -47,7 +47,7 @@ class SuraTransformer extends Transformer
 
         return [
             'id'                 => (int) $model->id,
-            'name'               => $content->name,
+            'name'               => $content ? $content->name : null,
             'revealed'           => trans("labels.{$model->revealed}"),
             'chronologicalOrder' => (int) $model->chronological_order,
             'verses'             => $verses,
