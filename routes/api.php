@@ -47,5 +47,6 @@ Route::group([
     ], function ()
     {
         Route::get('/', 'Api\V1\SuwarController@index');
+        Route::get('/{model}', 'Api\V1\SuwarController@show');
     });
 });
