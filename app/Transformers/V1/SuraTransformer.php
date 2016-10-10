@@ -18,6 +18,25 @@ class SuraTransformer extends Transformer
 {
 
     /**
+     * Return verses of Sura if set true
+     *
+     * @var bool
+     */
+    protected $verses = false;
+
+    /**
+     * @param $verses
+     *
+     * @return $this
+     */
+    public function setVerses($verses)
+    {
+        $this->verses = (bool) $verses;
+
+        return $this;
+    }
+
+    /**
      * Transform single item
      *
      * @param \Illuminate\Database\Eloquent\Model $model
@@ -34,23 +53,41 @@ class SuraTransformer extends Transformer
             ->whereLanguageKey(\App::getLocale())
             ->first() ?: SuraContent::whereSuraId($model->id)->first();
 
-        $verses = $model->verses()->orderBy('number', 'asc')->get()->map(function (Verse $verse)
-        {
-            return [
-                'id'         => (int) $verse->id,
-                'number'     => (int) $verse->number,
-                'text'       => $verse->text,
-                'cleanText'  => $verse->clean_text,
-                'characters' => $verse->characters,
-            ];
-        });
-
-        return [
+        $data = [
             'id'                 => (int) $model->id,
             'name'               => $content ? $content->name : null,
             'revealed'           => trans("labels.{$model->revealed}"),
             'chronologicalOrder' => (int) $model->chronological_order,
-            'verses'             => $verses,
         ];
+
+        if ($this->verses === true)
+        {
+            $verses = $model->verses()->orderBy('number', 'asc')->get()->map(function (Verse $verse)
+            {
+                return [
+                    'id'         => (int) $verse->id,
+                    'number'     => (int) $verse->number,
+                    'text'       => $verse->text,
+                    'cleanText'  => $verse->clean_text,
+                    'characters' => $verse->characters,
+                ];
+            });
+
+            $data['verses'] = $verses;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Get a key for cached model
+     *
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return string
+     */
+    protected function cacheKey(Model $model)
+    {
+        return get_class($model) . '_' . $model->getKey() . '_' . $this->verses . '_' . $model->updated_at;
     }
 }
