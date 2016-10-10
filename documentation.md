@@ -98,3 +98,57 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 }
 ```
 
+# Suwar
+
+#### Suwar list
+
+* _url:_ `/suwar`
+* _method_: `GET`
+* _response_: a `JSON` response like:
+
+```json
+{
+    "total": 2, // total number of suwar models
+    "limit": 15, // limit per page
+    "currentPage": 1, // current page number
+    "data": [   // arrau of models
+        {
+            "id": 1, // ID of sura
+            "name": "test", // name of sura
+            "revealed": "medinan",
+            "chronologicalOrder": 1
+        },
+        {
+            "id": 2,
+            "name": "Test 2",
+            "revealed": "medinan",
+            "chronologicalOrder": 3
+        }
+    ] 
+}
+```
+
+#### Show Sura information
+
+* _url:_ `/suwar/{model}` // `{model}` is The ID of Sura
+* _method_: `GET`
+* _response_: a `JSON` response like:
+
+```json
+{
+  "id": 1,
+  "name": "test",
+  "revealed": "labels.medinan",
+  "chronologicalOrder": 1,
+  "verses": [ // Array of verses
+     {
+        "id": 1, // ID of verse
+        "number": 1, // The number of verse
+        "text":  "The text of verse",
+        "cleanText":  "The clean text of verse",
+        "characters":  "The characters of verse"
+     }
+  ]
+}
+```
+
