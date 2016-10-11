@@ -31,8 +31,9 @@ class NarrationTransformer extends Transformer
             ->first() ?: NarrationName::whereNarrationId($model->id)->first();
 
         return [
-            'id'   => (int) $model->id,
-            'name' => $content ? $content->name : null,
+            'id'     => (int) $model->id,
+            'name'   => $content ? $content->name : null,
+            'weight' => $model->weight,
         ];
     }
 
