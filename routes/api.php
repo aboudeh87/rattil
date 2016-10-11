@@ -49,4 +49,18 @@ Route::group([
         Route::get('/', 'Api\V1\SuwarController@index');
         Route::get('/{model}', 'Api\V1\SuwarController@show');
     });
+
+    //--------------------------------------------------------|
+    //                    Recitations APIs                    |
+    //--------------------------------------------------------|
+    Route::group([
+        'prefix'     => '/recitations',
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::get('/my', 'Api\V1\RecitationController@myRecitation');
+        Route::get('/{model}', 'Api\V1\RecitationController@show');
+    });
 });
