@@ -46,15 +46,16 @@ class RecitationTransformer extends Transformer
      */
     protected function transformItem(Model $model)
     {
+        $verseTransformer = new VerseTransformer;
+
         /** @var Recitation $model */
         $data = [
             'id'             => (int) $model->id,
             'slug'           => $model->slug,
             'user'           => (new UserTransformer)->transform($model->user),
             'narration'      => (new NarrationTransformer)->transform($model->narration),
-            'fromVerse'      => $model->fromVerse->number,
-            'toVerse'        => $model->toVerse->number,
-            'mentions'       => (new UserTransformer)->transform($model->mentions),
+            'fromVerse'      => $verseTransformer->transform($model->fromVerse),
+            'toVerse'        => $verseTransformer->transform($model->toVerse),
             'date'           => $model->created_at->timestamp,
             'commentsCount'  => (int) ($model->comments_count === null ?
                 $model->comments()->count() : $model->comments_count),
@@ -66,8 +67,12 @@ class RecitationTransformer extends Transformer
 
         if ($this->show === true)
         {
+            $data['description'] = $model->description;
+            $data['url'] = $model->url;
+            $data['length'] = $model->length;
             $data['sura'] = (new SuraTransformer)->transform($model->sura);
-            $data['verses'] = (new VerseTransformer)->transform(
+            $data['mentions'] = (new UserTransformer)->transform($model->mentions);
+            $data['verses'] = $verseTransformer->transform(
                 $model->sura
                     ->verses()
                     ->whereBetween('number', [
