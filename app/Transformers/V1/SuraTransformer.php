@@ -4,7 +4,6 @@ namespace App\Transformers\V1;
 
 
 use App\Sura;
-use App\Verse;
 use App\SuraContent;
 use App\Transformers\Transformer;
 use Illuminate\Database\Eloquent\Model;
@@ -78,6 +77,6 @@ class SuraTransformer extends Transformer
      */
     protected function cacheKey(Model $model)
     {
-        return get_class($model) . '_' . $model->getKey() . '_' . $this->verses . '_' . $model->updated_at;
+        return get_class($model) . '_' . $model->getKey() . '_' . \App::getLocale() . '_' . $this->verses . '_' . $model->updated_at;
     }
 }
