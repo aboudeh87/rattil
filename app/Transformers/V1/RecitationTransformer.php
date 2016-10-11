@@ -54,6 +54,7 @@ class RecitationTransformer extends Transformer
             'narration'      => (new NarrationTransformer)->transform($model->narration),
             'fromVerse'      => $model->fromVerse->number,
             'toVerse'        => $model->toVerse->number,
+            'mentions'       => (new UserTransformer)->transform($model->mentions),
             'date'           => $model->created_at->timestamp,
             'commentsCount'  => (int) ($model->comments_count === null ?
                 $model->comments()->count() : $model->comments_count),
@@ -67,7 +68,8 @@ class RecitationTransformer extends Transformer
         {
             $data['sura'] = (new SuraTransformer)->transform($model->sura);
             $data['verses'] = (new VerseTransformer)->transform(
-                Verse::whereSuraId($model->sura_id)
+                $model->sura
+                    ->verses()
                     ->whereBetween('number', [
                         $model->fromVerse->number,
                         $model->toVerse->number,
