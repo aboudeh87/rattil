@@ -62,18 +62,8 @@ class SuraTransformer extends Transformer
 
         if ($this->verses === true)
         {
-            $verses = $model->verses()->orderBy('number', 'asc')->get()->map(function (Verse $verse)
-            {
-                return [
-                    'id'         => (int) $verse->id,
-                    'number'     => (int) $verse->number,
-                    'text'       => $verse->text,
-                    'cleanText'  => $verse->clean_text,
-                    'characters' => $verse->characters,
-                ];
-            });
-
-            $data['verses'] = $verses;
+            $transformer = new VerseTransformer();
+            $data['verses'] = $transformer->transform($model->verses()->orderBy('number', 'asc')->get());
         }
 
         return $data;
