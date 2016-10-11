@@ -104,6 +104,7 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 
 * _url:_ `/suwar`
 * _method_: `GET`
+* Authentication ***Required***
 * _response_: a `JSON` response like:
 
 ```json
@@ -132,6 +133,7 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 
 * _url:_ `/suwar/{model}` // `{model}` is The ID of Sura
 * _method_: `GET`
+* Authentication ***Required***
 * _response_: a `JSON` response like:
 
 ```json
@@ -148,6 +150,127 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
         "cleanText":  "The clean text of verse",
         "characters":  "The characters of verse"
      }
+  ]
+}
+```
+
+# Recitations
+
+#### My recitation list
+
+* _url:_ `/recitations/my`
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like:
+
+```json
+{
+  "total": 1, // total of user recitation
+  "limit": 15, // number of recitations per page
+  "currentPage": 1, // current page number
+  "data": [ // array of recitation
+    {
+      "id": 2, // ID of recitation
+      "slug": "xxxx",
+      "user": { // The owner of recitation
+        "id": 4,
+        "name": "AbdulKader",
+        "username": "abd",
+        "avatar": null
+      },
+      "narration": { // Narration information
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": { // Start verse
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": { // end Verse
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607, // Created date
+      "commentsCount": 0, // number of comments
+      "favoritesCount": 0, // number of favorites
+      "likesCount": 0 // number of likes
+    }
+  ]
+}
+```
+
+#### Show Recitation information
+
+* _url:_ `/recitations/{model}` // `{model}` is The ID of Recitation
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like:
+
+```json
+{
+  "id": 2,
+  "slug": "xxxx",
+  "user": { // Owner information
+    "id": 4,
+    "name": "AbdulKader",
+    "username": "abd",
+    "avatar": null
+  },
+  "narration": { // Narration information
+    "id": 1,
+    "name": "Test",
+    "weight": 2
+  },
+  "fromVerse": { // Start verse information
+    "id": 1,
+    "number": 1,
+    "text": "ssss",
+    "cleanText": "ssss",
+    "characters": "sss"
+  },
+  "toVerse": { // end verse information
+    "id": 2,
+    "number": 2,
+    "text": "dddd",
+    "cleanText": "dddd",
+    "characters": "dddd"
+  },
+  "date": 1476232607, // Created date timestamp
+  "commentsCount": 0,
+  "favoritesCount": 0,
+  "likesCount": 0,
+  "description": "xxxxx",
+  "url": "xxxx",
+  "sura": { // Sura information
+    "id": 1,
+    "name": "test",
+    "verseCount": 2,
+    "revealed": "labels.medinan",
+    "chronologicalOrder": 1
+  },
+  "mentions": [], // Array of Mentioned users
+  "verses": [ // Array of recited verses
+    {
+      "id": 1,
+      "number": 1,
+      "text": "ssss",
+      "cleanText": "ssss",
+      "characters": "sss"
+    },
+    {
+      "id": 2,
+      "number": 2,
+      "text": "dddd",
+      "cleanText": "dddd",
+      "characters": "dddd"
+    }
   ]
 }
 ```
