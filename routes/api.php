@@ -42,7 +42,7 @@ Route::group([
     Route::group([
         'prefix'     => '/suwar',
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
