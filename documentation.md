@@ -206,6 +206,22 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 }
 ```
 
+#### Post new Recitation
+
+* _url:_ `/recitations`
+* _method_: `POST`
+* Authentication ***required***
+* _parameters_:
+    * `sura_id` ***required*** // The ID of recited Sura
+    * `narration_id` ***required*** // The ID of recite's narration
+    * `from_verse` ***required*** // ID of start verse
+    * `to_verse` ***required*** // ID of end verse
+    * `file` ***required*** // file of recitation
+    * `description` ***optional*** // The comment on the recitation
+    * `mentions` ***optional*** // should be array of users IDs That mentioned in the post
+* _response_: normal `Success response`.
+
+
 #### Show Recitation information
 
 * _url:_ `/recitations/{model}` // `{model}` is The ID of Recitation
