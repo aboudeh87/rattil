@@ -67,6 +67,8 @@ class RecitationController extends ApiController
         $file = $request->file('file');
         $file->storeAs('temp', $model->id . '.' . $file->extension(), 'local');
 
+        \Event::fire(new NewRecitationPosted($model, $file));
+
         return $this->respondSuccess(trans('messages.posted_success'));
     }
 
