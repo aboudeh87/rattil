@@ -19,7 +19,7 @@ abstract class Transformer
      *
      * @param array|Collection|Model $models
      *
-     * @return Collection|Model
+     * @return Collection|array
      */
     public function transform($models)
     {
