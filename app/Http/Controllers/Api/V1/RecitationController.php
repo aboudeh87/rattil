@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\Events\NewRecitationPosted;
 use App\User;
 use App\Recitation;
+use App\Http\Requests\RecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
 
 class RecitationController extends ApiController
@@ -44,6 +46,28 @@ class RecitationController extends ApiController
                 ->paginate(),
             new RecitationTransformer
         );
+    }
+
+    /**
+     * Create a new model instance
+     *
+     * @param \App\Http\Requests\RecitationRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(RecitationRequest $request)
+    {
+
+        $model = new Recitation($request->all());
+        $model->user_id = $this->user->id;
+        $model->save();
+
+        $model->mentions()->sync($request->get('mentions', []));
+
+        $file = $request->file('file');
+        $file->storeAs('temp', $model->id . '.' . $file->extension(), 'local');
+
+        return $this->respondSuccess(trans('messages.posted_success'));
     }
 
     /**
