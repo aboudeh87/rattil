@@ -76,15 +76,11 @@ class Recitation extends Model implements LikableContract,
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'sura_id',
         'narration_id',
         'from_verse',
         'to_verse',
-        'slug',
         'description',
-        'url',
-        'length',
     ];
 
     /**
