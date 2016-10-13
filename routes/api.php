@@ -56,10 +56,11 @@ Route::group([
     Route::group([
         'prefix'     => '/recitations',
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
+        Route::post('/', 'Api\V1\RecitationController@store');
         Route::get('/my', 'Api\V1\RecitationController@myRecitation');
         Route::get('/{model}', 'Api\V1\RecitationController@show');
     });
