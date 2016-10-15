@@ -62,6 +62,7 @@ Route::group([
     {
         Route::post('/', 'Api\V1\RecitationController@store');
         Route::get('/my', 'Api\V1\RecitationController@myRecitation');
+        Route::get('/following', 'Api\V1\RecitationController@following');
         Route::get('/{model}', 'Api\V1\RecitationController@show');
     });
 });

@@ -49,6 +49,26 @@ class RecitationController extends ApiController
     }
 
     /**
+     * Return The recitation of followed users
+     * for the current user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function following()
+    {
+        return $this->respondWithPagination(
+            Recitation::withCount('comments', 'favorators', 'likes')
+                ->whereIn(
+                    'user_id',
+                    $this->user->following->pluck('id')->toArray()
+                )
+                ->orderBy('created_at', 'desc')
+                ->paginate(),
+            new RecitationTransformer
+        );
+    }
+
+    /**
      * Create a new model instance
      *
      * @param \App\Http\Requests\RecitationRequest $request
