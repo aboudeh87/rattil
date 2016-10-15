@@ -69,6 +69,21 @@ class RecitationController extends ApiController
     }
 
     /**
+     * Return the latest recitations
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function latest()
+    {
+        return $this->respondWithPagination(
+            Recitation::withCount('comments', 'favorators', 'likes')
+                ->orderBy('created_at', 'desc')
+                ->paginate(),
+            new RecitationTransformer
+        );
+    }
+
+    /**
      * Create a new model instance
      *
      * @param \App\Http\Requests\RecitationRequest $request
