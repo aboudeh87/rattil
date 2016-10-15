@@ -84,6 +84,22 @@ class RecitationController extends ApiController
     }
 
     /**
+     * Return list of popular recitations
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function popular()
+    {
+        return $this->respondWithPagination(
+            Recitation::withCount('comments', 'favorators', 'likes')
+                ->orderBy('likes_count', 'desc')
+                ->orderBy('created_at', 'desc')
+                ->paginate(),
+            new RecitationTransformer
+        );
+    }
+
+    /**
      * Create a new model instance
      *
      * @param \App\Http\Requests\RecitationRequest $request
