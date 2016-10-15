@@ -105,7 +105,7 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 * _url:_ `/suwar`
 * _method_: `GET`
 * Authentication ***Required***
-* _response_: a `JSON` response like:
+* _response_: a `JSON` response with pagination like:
 
 ```json
 {
@@ -161,7 +161,157 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 * _url:_ `/recitations/my`
 * _method_: `GET`
 * Authentication ***Required***
-* _response_: a `JSON` response like:
+* _response_: a `JSON` response with pagination like:
+
+```json
+{
+  "total": 1, // total of user recitation
+  "limit": 15, // number of recitations per page
+  "currentPage": 1, // current page number
+  "data": [ // array of recitation
+    {
+      "id": 2, // ID of recitation
+      "slug": "xxxx",
+      "user": { // The owner of recitation
+        "id": 4,
+        "name": "AbdulKader",
+        "username": "abd",
+        "avatar": null
+      },
+      "narration": { // Narration information
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": { // Start verse
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": { // end Verse
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607, // Created date
+      "commentsCount": 0, // number of comments
+      "favoritesCount": 0, // number of favorites
+      "likesCount": 0 // number of likes
+    }
+  ]
+}
+```
+
+#### Recitation list of followed people
+
+* _url:_ `/recitations/following`
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response pagination like:
+
+```json
+{
+  "total": 1, // total of user recitation
+  "limit": 15, // number of recitations per page
+  "currentPage": 1, // current page number
+  "data": [ // array of recitation
+    {
+      "id": 2, // ID of recitation
+      "slug": "xxxx",
+      "user": { // The owner of recitation
+        "id": 4,
+        "name": "AbdulKader",
+        "username": "abd",
+        "avatar": null
+      },
+      "narration": { // Narration information
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": { // Start verse
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": { // end Verse
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607, // Created date
+      "commentsCount": 0, // number of comments
+      "favoritesCount": 0, // number of favorites
+      "likesCount": 0 // number of likes
+    }
+  ]
+}
+```
+
+#### Latest recitations list
+
+* _url:_ `/recitations/latest`
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response pagination like:
+
+```json
+{
+  "total": 1, // total of user recitation
+  "limit": 15, // number of recitations per page
+  "currentPage": 1, // current page number
+  "data": [ // array of recitation
+    {
+      "id": 2, // ID of recitation
+      "slug": "xxxx",
+      "user": { // The owner of recitation
+        "id": 4,
+        "name": "AbdulKader",
+        "username": "abd",
+        "avatar": null
+      },
+      "narration": { // Narration information
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": { // Start verse
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": { // end Verse
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607, // Created date
+      "commentsCount": 0, // number of comments
+      "favoritesCount": 0, // number of favorites
+      "likesCount": 0 // number of likes
+    }
+  ]
+}
+```
+
+#### Popular recitations list
+
+* _url:_ `/recitations/popular`
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response pagination like:
 
 ```json
 {
