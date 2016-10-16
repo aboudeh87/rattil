@@ -441,3 +441,56 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 }
 ```
 
+#### Search Recitations 
+
+* _url:_ `/recitations/search`
+* _method_: `POST`
+* _parameters_:
+    * `keyword` ***required*** // minimum 2 characters 
+    * `sura_id` ***optional*** // could be an `array` or `string` with commas between Suwar IDs
+    * `narration_is` ***optional*** // could be an `array` or `string` with commas between narrations IDs
+* Authentication ***Required***
+* _response_: a `JSON` response pagination like:
+
+```json
+{
+  "total": 1, // total of user recitation
+  "limit": 15, // number of recitations per page
+  "currentPage": 1, // current page number
+  "data": [ // array of recitation
+    {
+      "id": 2, // ID of recitation
+      "slug": "xxxx",
+      "user": { // The owner of recitation
+        "id": 4,
+        "name": "AbdulKader",
+        "username": "abd",
+        "avatar": null
+      },
+      "narration": { // Narration information
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": { // Start verse
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": { // end Verse
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607, // Created date
+      "commentsCount": 0, // number of comments
+      "favoritesCount": 0, // number of favorites
+      "likesCount": 0 // number of likes
+    }
+  ]
+}
+```
