@@ -56,7 +56,7 @@ Route::group([
     Route::group([
         'prefix'     => '/recitations',
         'middleware' => [
-            'auth:api',
+//            'auth:api',
         ],
     ], function ()
     {
@@ -65,6 +65,7 @@ Route::group([
         Route::get('/following', 'Api\V1\RecitationController@following');
         Route::get('/latest', 'Api\V1\RecitationController@latest');
         Route::get('/popular', 'Api\V1\RecitationController@popular');
+        Route::post('/search', 'Api\V1\RecitationController@search');
         Route::get('/{model}', 'Api\V1\RecitationController@show');
     });
 });

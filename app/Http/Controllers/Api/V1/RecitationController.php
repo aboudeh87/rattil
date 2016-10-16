@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 
-use App\Events\NewRecitationPosted;
 use App\User;
 use App\Recitation;
+use Illuminate\Http\Request;
+use App\Events\NewRecitationPosted;
 use App\Http\Requests\RecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
 
@@ -136,6 +137,60 @@ class RecitationController extends ApiController
             (new RecitationTransformer)->setShow(true)->transform(
                 $model->withCount('comments', 'favorators', 'likes')->first()
             )
+        );
+    }
+
+    /**
+     * Search in recitation
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $this->validate($request, ['keyword' => 'required|min:2']);
+
+        $suwar = $request->get('sura_id', []);
+        $narrations = $request->get('narration_id', []);
+        $keyword = $request->get('keyword', null);
+
+        if ($suwar && !is_array($suwar))
+        {
+            $suwar = explode(',', $suwar);
+        }
+
+        if ($narrations && !is_array($narrations))
+        {
+            $narrations = explode(',', $narrations);
+        }
+
+        $models = Recitation::withCount('comments', 'favorators', 'likes');
+
+        if ($keyword)
+        {
+            $keyword = '%' . str_replace(' ', '%', $keyword) . '%';
+            $models->whereHas('sura.content', function ($query) use ($keyword)
+            {
+                $query->where('name', 'like', $keyword)
+                    ->orWhere('definition', 'like', $keyword);
+            });
+        }
+
+        if (count($suwar))
+        {
+            $models->whereIn('sura_id', $suwar);
+        }
+
+        if (count($narrations))
+        {
+            $models->whereIn('narration_id', $narrations);
+        }
+
+        return $this->respondWithPagination(
+            $models->orderBy('created_at', 'desc')
+                ->paginate(),
+            new RecitationTransformer
         );
     }
 }
