@@ -79,8 +79,7 @@ Route::group([
         ],
     ], function ()
     {
+        Route::post('/', 'Api\V1\ProfileController@update');
         Route::get('/{model?}', 'Api\V1\ProfileController@show');
     });
-
-
 });
