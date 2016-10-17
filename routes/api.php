@@ -68,4 +68,19 @@ Route::group([
         Route::post('/search', 'Api\V1\RecitationController@search');
         Route::get('/{model}', 'Api\V1\RecitationController@show');
     });
+
+    //--------------------------------------------------------|
+    //                      Profiles APIs                     |
+    //--------------------------------------------------------|
+    Route::group([
+        'prefix'     => '/profiles',
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::get('/{model?}', 'Api\V1\ProfileController@show');
+    });
+
+
 });
