@@ -26,6 +26,7 @@ and include the needed method as an extra parameter `_method`.
 }
 ```
 
+---
 
 ## Authentication 
 
@@ -101,6 +102,8 @@ and include the needed method as an extra parameter `_method`.
 }
 ```
 
+---
+
 # Suwar
 
 #### Suwar list
@@ -156,6 +159,8 @@ and include the needed method as an extra parameter `_method`.
   ]
 }
 ```
+
+---
 
 # Recitations
 
@@ -497,6 +502,8 @@ and include the needed method as an extra parameter `_method`.
   ]
 }
 ```
+
+---
 
 ## Profiles 
 
