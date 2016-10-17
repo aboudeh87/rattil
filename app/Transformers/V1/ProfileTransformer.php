@@ -32,15 +32,32 @@ class ProfileTransformer extends Transformer
             'avatar'   => $model->avatar,
         ];
 
-        $properties = array_keys(config('profile'));
+        $properties = array_keys(config('profile.rules', []));
 
         foreach ($properties as $property)
         {
-            $propertyModel = $model->properties()->where('key', $property)->first();
 
+            if (in_array($property, config('profile.owner', [])) && $model->id !== auth('api')->id())
+            {
+                continue;
+            }
+
+            $propertyModel = $model->properties()->where('key', $property)->first();
             $data[$property] = $propertyModel ? $propertyModel->value : null;
         }
 
         return $data;
+    }
+
+    /**
+     * Get a key for cached model
+     *
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return string
+     */
+    protected function cacheKey(Model $model)
+    {
+        return 'profile_' . $model->getKey() . '_' . ($model->getKey() === auth('api')->id()) . $model->updated_at;
     }
 }
