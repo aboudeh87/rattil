@@ -5,6 +5,9 @@ To send authenticated request, add `Authorization` header to the request with
 
 All the URIs in this documentation has a prefix: `/api/v1/`.
 
+APIs That need methods (`PUT`, `PATCH`, `DELETE`), it should sent as `POST` request
+and include the needed method as an extra parameter `_method`.
+
 ***Responses:***
 
 **Success response:**
