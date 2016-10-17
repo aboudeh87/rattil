@@ -515,6 +515,24 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 * _response_: normal `Success response`.
 
 
+#### Upload a profile image
+
+* _url:_ `/profiles/{model}/avatar` // `{model}` is the `username` or `ID` of logged in user
+* _method_: `POST`
+* _parameters_:
+    * `image` ***required*** // image file
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
+#### Delete profile image
+
+* _url:_ `/profiles/{model}/avatar` // `{model}` is the `username` or `ID` of logged in user
+* _method_: `DELETE`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
 #### Show profile information
 
 * _url:_ `/profiles/{model?}` // `{model}` is the `user ID` or `username`. if you leave it empty will return the profile of logged in user.
