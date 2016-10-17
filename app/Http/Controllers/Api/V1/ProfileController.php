@@ -46,7 +46,7 @@ class ProfileController extends ApiController
     }
 
     /**
-     * Upload avatar for current user
+     * Upload avatar for logged in user
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -61,6 +61,20 @@ class ProfileController extends ApiController
         $this->imageProcess($request);
 
         return $this->respondSuccess(trans('messages.avatar_uploaded_success'));
+    }
+
+    /**
+     * Delete avatar for logged in user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteAvatar()
+    {
+        $this->model = auth($this->guard)->user();
+
+        Storage::delete(self::IMAGES_PATH . $this->getAvatarName());
+
+        return $this->respondSuccess(trans('messages.avatar_deleted_success'));
     }
 
     /**
@@ -148,7 +162,8 @@ class ProfileController extends ApiController
                     $constraint->upsize();
                 });
 
-            $filename = md5($this->model->id) . '.jpg';
+            $filename = $this->getAvatarName();
+
             if ($this->model->avatar)
             {
                 Storage::delete(self::IMAGES_PATH . $filename);
@@ -158,6 +173,16 @@ class ProfileController extends ApiController
 
             $this->model->avatar = $request->root() . self::IMAGES_PATH . $filename;
         }
+    }
+
+    /**
+     * Get image file name for logged in user
+     *
+     * @return string
+     */
+    protected function getAvatarName()
+    {
+        return md5($this->model->id) . '.jpg';
     }
 
     /**
