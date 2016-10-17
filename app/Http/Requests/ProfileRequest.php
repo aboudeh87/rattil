@@ -25,6 +25,6 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        return array_merge(['image' => 'image', 'name' => 'max:255'], config('profile.rules', []));
+        return array_merge(['name' => 'required|max:255', 'image' => 'image'], config('profile.rules', []));
     }
 }
