@@ -29,6 +29,8 @@ class ProfileController extends ApiController
      * Update profile of current user
      *
      * @param \App\Http\Requests\ProfileRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ProfileRequest $request)
     {
