@@ -497,6 +497,24 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
 
 ## Profiles 
 
+#### Update profile
+
+* _url:_ `/profiles`
+* _method_: `POST`
+* _parameters_:
+    * `name` ***required*** // maximum 255 characters 
+    * `image` ***optional*** // profile image file
+    * `bio` ***optional*** //  Maximum 500 characters
+    * `language_key` ***optional*** // should be a key exists in languages database
+    * `country` ***optional*** // should be a key exists in countries database
+    * `city` ***optional***
+    * `gender` ***optional*** // available values: [`male`|`female`]
+    * `email_notification` ***optional*** // boolean
+    * `private` ***optional*** // boolean
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
 #### Show profile information
 
 * _url:_ `/profiles/{model?}` // `{model}` is the `user ID` or `username`. if you leave it empty will return the profile of logged in user.
