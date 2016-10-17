@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use Image;
+use Storage;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ProfileRequest;
 use App\Transformers\V1\ProfileTransformer;
-use Storage;
 
 class ProfileController extends ApiController
 {
@@ -42,6 +43,24 @@ class ProfileController extends ApiController
         $this->model->save();
 
         return $this->handleProfileUpdatedSuccess();
+    }
+
+    /**
+     * Upload avatar for current user
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadAvatar(Request $request)
+    {
+        $this->validate($request, ['image' => 'required|image']);
+
+        $this->model = auth($this->guard)->user();
+
+        $this->imageProcess($request);
+
+        return $this->respondSuccess(trans('messages.avatar_uploaded_success'));
     }
 
     /**
@@ -113,9 +132,9 @@ class ProfileController extends ApiController
     /**
      * Process upload avatar of user
      *
-     * @param \App\Http\Requests\ProfileRequest $request
+     * @param \Illuminate\Http\Request $request
      */
-    protected function imageProcess(ProfileRequest $request)
+    protected function imageProcess(Request $request)
     {
         $file = $request->file('image');
 
