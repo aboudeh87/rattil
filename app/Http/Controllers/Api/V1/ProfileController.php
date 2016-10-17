@@ -13,7 +13,7 @@ use Storage;
 class ProfileController extends ApiController
 {
 
-    const IMAGES_PATH = 'public/uploads/profiles/';
+    const IMAGES_PATH = '/public/profiles/';
 
     /**
      * @var string
