@@ -82,5 +82,6 @@ Route::group([
         Route::post('/', 'Api\V1\ProfileController@update');
         Route::get('/{model?}', 'Api\V1\ProfileController@show');
         Route::post('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
+        Route::delete('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
     });
 });
