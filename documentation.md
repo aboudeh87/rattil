@@ -494,3 +494,28 @@ All the URIs in this documentation has a prefix: `/api/v1/`.
   ]
 }
 ```
+
+## Profiles 
+
+#### Show profile information
+
+* _url:_ `/profiles/{model?}` // `{model}` is the `user ID` or `username`. if you leave it empty will return the profile of logged in user.
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+    "id": 4,
+    "name": "AbdulKader Zein Eddin",
+    "username": "abd",
+    "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
+    "bio": "Bio text",
+    "language_key": "en",
+    "country": "SA",
+    "city": "Al Riyad",
+    "gender": "male",
+    "email_notification": 1, // This variable will return only if the profile is for logged in user
+    "private": 0 // This variable will return only if the profile is for logged in user
+}
+```
