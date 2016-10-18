@@ -29,8 +29,7 @@ class FollowersController extends ApiController
 
         if (
         !$user->following()
-            ->where('followable_type', User::class)
-            ->where('followable_id', $model->id)
+            ->where(['followable_type' => User::class, 'followable_id' => $model->id])
             ->count()
         )
         {
@@ -40,9 +39,7 @@ class FollowersController extends ApiController
             ]);
         }
 
-        return $this->respondSuccess(
-            trans('messages.user_followed_success', ['name' => $model->name])
-        );
+        return $this->handleFollowSuccessResponse($model);
     }
 
     /**
@@ -93,14 +90,24 @@ class FollowersController extends ApiController
             User::withCount('recitations')
                 ->whereIn(
                     'id',
-                    $this->model
-                        ->followers()
-                        ->get()
-                        ->pluck('user_id')
-                        ->toArray()
+                    $this->model->followers()->get()->pluck('user_id')->toArray()
                 )
                 ->paginate(),
             new FollowerTransformer
+        );
+    }
+
+    /**
+     * return success response after following an user
+     *
+     * @param \App\User $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function handleFollowSuccessResponse(User $model)
+    {
+        return $this->respondSuccess(
+            trans('messages.user_followed_success', ['name' => $model->name])
         );
     }
 }
