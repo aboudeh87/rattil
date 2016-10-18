@@ -50,6 +50,7 @@ trait ProfilesChecker
         return (bool) $this->model
             ->followers()
             ->where('user_id', auth($this->guard)->id())
+            ->where('accepted', true)
             ->count();
     }
 
