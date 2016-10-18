@@ -5,7 +5,7 @@ To send authenticated request, add `Authorization` header to the request with
 
 All the URIs in this documentation has a prefix: `/api/v1/`.
 
-APIs That need methods (`PUT`, `PATCH`, `DELETE`), it should sent as `POST` request
+APIs That need methods (`PUT`, `PATCH`), it should sent as `POST` request
 and include the needed method as an extra parameter `_method`.
 
 ***Responses:***
@@ -565,3 +565,73 @@ and include the needed method as an extra parameter `_method`.
     "private": 0 // This variable will return only if the profile is for logged in user
 }
 ```
+
+---
+
+## Follow system 
+
+#### Follow an user
+
+* _url:_ `/follows/{model}` // `{model}` is the `User ID` or `username` to follow
+* _method_: `POST`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+#### Un-Follow an user
+
+* _url:_ `/follows/{model}` // `{model}` is the `User ID` or `username` to un-follow
+* _method_: `DELETE`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
+#### The followers list of an user
+
+* _url:_ `/follows/{model}/followers` // `{model}` is the `username` or `ID` of user.
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+    "total": 1,
+    "limit": 15,
+    "currentPage": 1,
+    "data": [ // Array of users
+        {
+            "id": 4,
+            "name": "aboudeh",
+            "username": "abd",
+            "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
+            "country": null,
+            "recitations_count": 1
+        }
+    ]
+}
+```
+
+#### The following list of an user
+
+* _url:_ `/follows/{model}/following` // `{model}` is the `username` or `ID` of user.
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+    "total": 1,
+    "limit": 15,
+    "currentPage": 1,
+    "data": [ // Array of users
+        {
+            "id": 4,
+            "name": "aboudeh",
+            "username": "abd",
+            "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
+            "country": null,
+            "recitations_count": 1
+        }
+    ]
+}
+```
+
