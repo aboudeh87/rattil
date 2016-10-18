@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\Traits\JsonResponses;
 use Image;
 use Storage;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use App\Transformers\V1\ProfileTransformer;
 class ProfileController extends ApiController
 {
 
-    use ProfilesChecker;
+    use ProfilesChecker, JsonResponses;
 
     const IMAGES_PATH = '/public/profiles/';
 
@@ -82,7 +83,7 @@ class ProfileController extends ApiController
     {
         if (!$this->isAllowed($id))
         {
-            return $this->handleAccessDeniedResponse();
+            return $this->accessDeniedResponse();
         }
 
         return $this->returnProfileResponse();
@@ -128,16 +129,6 @@ class ProfileController extends ApiController
     protected function getAvatarName()
     {
         return md5($this->model->id) . '.jpg';
-    }
-
-    /**
-     * Return Access denied response
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function handleAccessDeniedResponse()
-    {
-        return $this->respondError(trans('messages.privacy_access_denied'), 403);
     }
 
     /**
