@@ -126,4 +126,12 @@ class User extends Authenticatable implements FollowableContract
     {
         return $this->hasMany(UserProperty::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recitations()
+    {
+        return $this->hasMany(Recitation::class);
+    }
 }
