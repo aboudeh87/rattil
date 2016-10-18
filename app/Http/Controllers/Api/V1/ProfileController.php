@@ -71,6 +71,8 @@ class ProfileController extends ApiController
     public function deleteAvatar()
     {
         $this->model = auth($this->guard)->user();
+        $this->model->avatar = null;
+        $this->model->save();
 
         Storage::delete(self::IMAGES_PATH . $this->getAvatarName());
 
