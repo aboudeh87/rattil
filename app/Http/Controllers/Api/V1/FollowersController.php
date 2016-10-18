@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\User;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use App\Transformers\V1\FollowerTransformer;
@@ -27,7 +28,17 @@ class FollowersController extends ApiController
         }
 
         return $this->respondWithPagination(
-            $this->model->following()->withCount('recitations')->paginate(),
+            User::withCount('recitations')
+                ->whereIn(
+                    'id',
+                    $this->model
+                        ->following()
+                        ->where('followable_type', User::class)
+                        ->get()
+                        ->pluck('followable_id')
+                        ->toArray()
+                )
+                ->paginate(),
             new FollowerTransformer
         );
     }
@@ -47,7 +58,16 @@ class FollowersController extends ApiController
         }
 
         return $this->respondWithPagination(
-            $this->model->followers()->withCount('recitations')->paginate(),
+            User::withCount('recitations')
+                ->whereIn(
+                    'id',
+                    $this->model
+                        ->followers()
+                        ->get()
+                        ->pluck('user_id')
+                        ->toArray()
+                )
+                ->paginate(),
             new FollowerTransformer
         );
     }

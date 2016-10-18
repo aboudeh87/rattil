@@ -84,4 +84,18 @@ Route::group([
         Route::post('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
         Route::delete('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
     });
+
+    //--------------------------------------------------------|
+    //                     Follow APIs                     |
+    //--------------------------------------------------------|
+    Route::group([
+        'prefix'     => '/follows',
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::get('/{model}/followers', 'Api\V1\FollowersController@followers');
+        Route::get('/{model}/following', 'Api\V1\FollowersController@following');
+    });
 });
