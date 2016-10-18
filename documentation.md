@@ -164,9 +164,9 @@ and include the needed method as an extra parameter `_method`.
 
 # Recitations
 
-#### My recitation list
+#### recitation list of an user
 
-* _url:_ `/recitations/my`
+* _url:_ `/recitations/list/{model?}` // `{model}` is the user `ID` or `username`. if you leave it empty will return the recitations of logged in user. 
 * _method_: `GET`
 * Authentication ***Required***
 * _response_: a `JSON` response with pagination like:
