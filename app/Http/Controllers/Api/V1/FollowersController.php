@@ -31,4 +31,24 @@ class FollowersController extends ApiController
             new FollowerTransformer
         );
     }
+
+    /**
+     * Return The followers users of a specific user
+     *
+     * @param null|string $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function followers($model = null)
+    {
+        if (!$this->isAllowed($model))
+        {
+            return $this->accessDeniedResponse();
+        }
+
+        return $this->respondWithPagination(
+            $this->model->followers()->withCount('recitations')->paginate(),
+            new FollowerTransformer
+        );
+    }
 }
