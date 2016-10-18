@@ -61,12 +61,11 @@ Route::group([
     ], function ()
     {
         Route::post('/', 'Api\V1\RecitationController@store');
-        Route::get('/my', 'Api\V1\RecitationController@myRecitation');
         Route::get('/following', 'Api\V1\RecitationController@following');
         Route::get('/latest', 'Api\V1\RecitationController@latest');
         Route::get('/popular', 'Api\V1\RecitationController@popular');
         Route::post('/search', 'Api\V1\RecitationController@search');
-        Route::get('/{model}', 'Api\V1\RecitationController@show');
+        Route::get('/list/{model?}', 'Api\V1\RecitationController@recitations');
     });
 
     //--------------------------------------------------------|
