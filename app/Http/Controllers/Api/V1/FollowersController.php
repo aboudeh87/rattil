@@ -43,6 +43,29 @@ class FollowersController extends ApiController
     }
 
     /**
+     * Un-Follow an user
+     *
+     * @param null $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unfollow($model)
+    {
+        $model = $this->getUserModel($model);
+
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $user->following()
+            ->where([
+                'followable_type' => User::class,
+                'followable_id'   => $model->id,
+            ])->delete();
+
+        return $this->handleUnFollowSuccessResponse($model);
+    }
+
+    /**
      * Return The following users of a specific user
      *
      * @param null|string $model
@@ -108,6 +131,20 @@ class FollowersController extends ApiController
     {
         return $this->respondSuccess(
             trans('messages.user_followed_success', ['name' => $model->name])
+        );
+    }
+
+    /**
+     * return success response after Un-following an user
+     *
+     * @param \App\User $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function handleUnFollowSuccessResponse(User $model)
+    {
+        return $this->respondSuccess(
+            trans('messages.user_unfollowed_success', ['name' => $model->name])
         );
     }
 }

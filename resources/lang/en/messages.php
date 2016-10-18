@@ -7,4 +7,5 @@ return [
     'avatar_uploaded_success' => 'Your new profile image uploaded successfully.',
     'avatar_deleted_success'  => 'Your profile image deleted successfully.',
     'user_followed_success'   => ':name followed successfully.',
+    'user_unfollowed_success' => ':name un-followed successfully.',
 ];
