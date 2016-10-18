@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use Image;
 use Storage;
-use App\User;
 use Illuminate\Http\Request;
+use App\Traits\ProfilesChecker;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ProfileRequest;
 use App\Transformers\V1\ProfileTransformer;
@@ -14,17 +14,9 @@ use App\Transformers\V1\ProfileTransformer;
 class ProfileController extends ApiController
 {
 
+    use ProfilesChecker;
+
     const IMAGES_PATH = '/public/profiles/';
-
-    /**
-     * @var string
-     */
-    protected $guard = 'api';
-
-    /**
-     * @var User
-     */
-    protected $model;
 
     /**
      * Update profile of current user
@@ -94,55 +86,6 @@ class ProfileController extends ApiController
         }
 
         return $this->returnProfileResponse();
-    }
-
-    /**
-     * Check if the logged in user can access profile
-     *
-     * @param string $value
-     *
-     * @return bool
-     */
-    protected function isAllowed($value = null)
-    {
-        if ($value === null)
-        {
-            $this->model = auth($this->guard)->user();
-
-            return true;
-        }
-
-        $this->model = $this->getUserModel($value);
-        $privacy = $this->model->properties()->whereKey('private')->first();
-
-        if ($this->model->id === auth($this->guard)->id() || !$privacy || !$privacy->value)
-        {
-            return true;
-        }
-
-        return (bool) $this->model
-            ->followers()
-            ->where('user_id', auth($this->guard)->id())
-            ->count();
-    }
-
-    /**
-     * Get user model from username or ID
-     *
-     * @param string $value
-     *
-     * @return User
-     */
-    protected function getUserModel($value)
-    {
-        if (is_numeric($value))
-        {
-            return User::whereId($value)->firstOrFail();
-        }
-        else
-        {
-            return User::whereUsername($value)->firstOrFail();
-        }
     }
 
     /**
