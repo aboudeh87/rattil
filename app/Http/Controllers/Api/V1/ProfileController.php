@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 
-use App\Traits\JsonResponses;
 use Image;
 use Storage;
 use Illuminate\Http\Request;
+use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ProfileRequest;
