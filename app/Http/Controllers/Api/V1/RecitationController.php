@@ -43,6 +43,7 @@ class RecitationController extends ApiController
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
                 ->whereUserId($this->user->id)
+                ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
             new RecitationTransformer
@@ -63,6 +64,7 @@ class RecitationController extends ApiController
                     'user_id',
                     $this->user->following->pluck('id')->toArray()
                 )
+                ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
             new RecitationTransformer
@@ -78,6 +80,7 @@ class RecitationController extends ApiController
     {
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
+                ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
             new RecitationTransformer
@@ -93,6 +96,7 @@ class RecitationController extends ApiController
     {
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
+                ->whereDisabled(false)
                 ->orderBy('likes_count', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
@@ -133,6 +137,11 @@ class RecitationController extends ApiController
      */
     public function show(Recitation $model)
     {
+        if ($model->disabled)
+        {
+            return $this->respondError(trans('messages.recitation_removed'));
+        }
+
         return $this->respond(
             (new RecitationTransformer)->setShow(true)->transform(
                 $model->withCount('comments', 'favorators', 'likes')->first()
@@ -165,7 +174,8 @@ class RecitationController extends ApiController
             $narrations = explode(',', $narrations);
         }
 
-        $models = Recitation::withCount('comments', 'favorators', 'likes');
+        $models = Recitation::withCount('comments', 'favorators', 'likes')
+            ->whereDisabled(false);
 
         if ($keyword)
         {
