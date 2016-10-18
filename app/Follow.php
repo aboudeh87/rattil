@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $user_id
  * @property string $followable_type
  * @property integer $followable_id
+ * @property boolean $accepted
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user

@@ -20,6 +20,7 @@ class CreateFollowersTable extends Migration
             $table->integer('user_id', false, true);
             $table->string('followable_type');
             $table->integer('followable_id', false, true);
+            $table->boolean('accepted')->defult(false);
             $table->timestamps();
 
             $table->unique(['user_id', 'followable_type', 'followable_id']);
