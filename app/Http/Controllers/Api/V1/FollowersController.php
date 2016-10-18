@@ -83,20 +83,23 @@ class FollowersController extends ApiController
         }
 
         return $this->respondWithPagination(
-            User::withCount('recitations')
-                ->whereIn(
-                    'id',
-                    $this->model
-                        ->following()
-                        ->where([
-                            'followable_type' => User::class,
-                            'accepted'        => true,
-                        ])
-                        ->get()
-                        ->pluck('followable_id')
-                        ->toArray()
-                )
-                ->paginate(),
+            User::withCount([
+                'recitations' => function ($query)
+                {
+                    $query->whereDisabled(false);
+                },
+            ])->whereIn(
+                'id',
+                $this->model
+                    ->following()
+                    ->where([
+                        'followable_type' => User::class,
+                        'accepted'        => true,
+                    ])
+                    ->get()
+                    ->pluck('followable_id')
+                    ->toArray()
+            )->paginate(),
             new FollowerTransformer
         );
     }
@@ -116,17 +119,20 @@ class FollowersController extends ApiController
         }
 
         return $this->respondWithPagination(
-            User::withCount('recitations')
-                ->whereIn(
-                    'id',
-                    $this->model
-                        ->followers()
-                        ->where('accepted', true)
-                        ->get()
-                        ->pluck('user_id')
-                        ->toArray()
-                )
-                ->paginate(),
+            User::withCount([
+                'recitations' => function ($query)
+                {
+                    $query->whereDisabled(false);
+                },
+            ])->whereIn(
+                'id',
+                $this->model
+                    ->followers()
+                    ->where('accepted', true)
+                    ->get()
+                    ->pluck('user_id')
+                    ->toArray()
+            )->paginate(),
             new FollowerTransformer
         );
     }

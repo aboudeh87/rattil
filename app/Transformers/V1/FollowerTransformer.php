@@ -34,7 +34,7 @@ class FollowerTransformer extends Transformer
             'avatar'            => $model->avatar,
             'country'           => $country ? $country->value : null,
             'recitations_count' => isset($model->recitation_count) ?
-                $model->recitation_count : $model->recitations()->count(),
+                $model->recitation_count : $model->recitations()->whereDisabled(false)->count(),
         ];
     }
 }
