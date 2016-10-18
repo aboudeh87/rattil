@@ -46,6 +46,11 @@ class ProfileTransformer extends Transformer
             $data[$property] = $propertyModel ? $propertyModel->value : null;
         }
 
+        $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
+        $data['following_count'] = $model->following()->whereAccepted(true)->count();
+        $data['favorites_count'] = $model->favorites()->count();
+        $data['recitations_count'] = $model->recitations()->where('disabled', false)->count();
+
         return $data;
     }
 
