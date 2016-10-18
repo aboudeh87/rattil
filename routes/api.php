@@ -96,6 +96,7 @@ Route::group([
     ], function ()
     {
         Route::post('/{model}', 'Api\V1\FollowersController@follow');
+        Route::delete('/{model}', 'Api\V1\FollowersController@unfollow');
         Route::get('/{model}/followers', 'Api\V1\FollowersController@followers');
         Route::get('/{model}/following', 'Api\V1\FollowersController@following');
     });
