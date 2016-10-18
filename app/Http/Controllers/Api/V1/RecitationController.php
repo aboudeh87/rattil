@@ -6,12 +6,16 @@ namespace App\Http\Controllers\Api\V1;
 use App\User;
 use App\Recitation;
 use Illuminate\Http\Request;
+use App\Traits\JsonResponses;
+use App\Traits\ProfilesChecker;
 use App\Events\NewRecitationPosted;
 use App\Http\Requests\RecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
 
 class RecitationController extends ApiController
 {
+
+    use ProfilesChecker, JsonResponses;
 
     /**
      * Logged in user
@@ -36,13 +40,20 @@ class RecitationController extends ApiController
     /**
      * Return The recitation of logged in user
      *
+     * @param null|string $model
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function myRecitation()
+    public function recitations($model = null)
     {
+        if (!$this->isAllowed($model))
+        {
+            return $this->accessDeniedResponse();
+        }
+
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
-                ->whereUserId($this->user->id)
+                ->whereUserId($this->model->id)
                 ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
@@ -60,10 +71,7 @@ class RecitationController extends ApiController
     {
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
-                ->whereIn(
-                    'user_id',
-                    $this->user->following->pluck('id')->toArray()
-                )
+                ->whereIn('user_id', $this->user->following()->whereAccepted(true)->pluck('id')->toArray())
                 ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
@@ -81,6 +89,7 @@ class RecitationController extends ApiController
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
                 ->whereDisabled(false)
+                ->whereNotin('user_id', $this->getPrivateUserIds())
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
             new RecitationTransformer
@@ -97,6 +106,7 @@ class RecitationController extends ApiController
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
                 ->whereDisabled(false)
+                ->whereNotin('user_id', $this->getPrivateUserIds())
                 ->orderBy('likes_count', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
@@ -175,7 +185,8 @@ class RecitationController extends ApiController
         }
 
         $models = Recitation::withCount('comments', 'favorators', 'likes')
-            ->whereDisabled(false);
+            ->whereDisabled(false)
+            ->whereNotin('user_id', $this->getPrivateUserIds());
 
         if ($keyword)
         {
@@ -202,5 +213,24 @@ class RecitationController extends ApiController
                 ->paginate(),
             new RecitationTransformer
         );
+    }
+
+    /**
+     * Get private users IDs array
+     *
+     * @return array
+     */
+    protected function getPrivateUserIds()
+    {
+        return User::whereHas(
+            'properties',
+            function ($query)
+            {
+                $query->whereKey('private')->whereValue(true);
+            })
+            ->where('id', '!=', $this->user->id)
+            ->get(['id'])
+            ->pluck('id')
+            ->toArray();
     }
 }
