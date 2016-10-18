@@ -14,6 +14,38 @@ class FollowersController extends ApiController
     use ProfilesChecker, JsonResponses;
 
     /**
+     * Follow an user
+     *
+     * @param null $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function follow($model)
+    {
+        $model = $this->getUserModel($model);
+
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        if (
+        !$user->following()
+            ->where('followable_type', User::class)
+            ->where('followable_id', $model->id)
+            ->count()
+        )
+        {
+            $user->following()->create([
+                'followable_type' => User::class,
+                'followable_id'   => $model->id,
+            ]);
+        }
+
+        return $this->respondSuccess(
+            trans('messages.user_followed_success', ['name' => $model->name])
+        );
+    }
+
+    /**
      * Return The following users of a specific user
      *
      * @param null|string $model

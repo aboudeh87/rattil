@@ -6,4 +6,5 @@ return [
     'profile_updated_success' => 'Your profile updated successfully.',
     'avatar_uploaded_success' => 'Your new profile image uploaded successfully.',
     'avatar_deleted_success'  => 'Your profile image deleted successfully.',
+    'user_followed_success'   => ':name followed successfully.',
 ];
