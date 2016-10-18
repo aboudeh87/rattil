@@ -33,9 +33,12 @@ class FollowersController extends ApiController
             ->count()
         )
         {
+            $private = $model->properties()->whereKey('private')->first();
+
             $user->following()->create([
                 'followable_type' => User::class,
                 'followable_id'   => $model->id,
+                'accepted'        => $private && $private->value ? false : true,
             ]);
         }
 
@@ -85,7 +88,10 @@ class FollowersController extends ApiController
                     'id',
                     $this->model
                         ->following()
-                        ->where('followable_type', User::class)
+                        ->where([
+                            'followable_type' => User::class,
+                            'accepted'        => true,
+                        ])
                         ->get()
                         ->pluck('followable_id')
                         ->toArray()
@@ -113,7 +119,12 @@ class FollowersController extends ApiController
             User::withCount('recitations')
                 ->whereIn(
                     'id',
-                    $this->model->followers()->get()->pluck('user_id')->toArray()
+                    $this->model
+                        ->followers()
+                        ->where('accepted', true)
+                        ->get()
+                        ->pluck('user_id')
+                        ->toArray()
                 )
                 ->paginate(),
             new FollowerTransformer
