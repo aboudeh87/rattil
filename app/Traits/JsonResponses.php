@@ -3,6 +3,8 @@
 namespace App\Traits;
 
 
+use App\Recitation;
+
 /**
  * Class JsonResponses
  *
@@ -21,5 +23,17 @@ trait JsonResponses
     protected function accessDeniedResponse($message = null)
     {
         return $this->respondError($message ?: trans('messages.privacy_access_denied'), 403);
+    }
+
+    /**
+     * Check if recitation disabled
+     *
+     * @param \App\Recitation $model
+     *
+     * @return bool
+     */
+    protected function checkIfRecitationDisabled(Recitation $model)
+    {
+        return (bool) $model->disabled;
     }
 }

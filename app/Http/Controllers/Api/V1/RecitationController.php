@@ -147,7 +147,7 @@ class RecitationController extends ApiController
      */
     public function show(Recitation $model)
     {
-        if ($model->disabled)
+        if ($this->checkIfRecitationDisabled($model))
         {
             return $this->respondError(trans('messages.recitation_removed'));
         }
