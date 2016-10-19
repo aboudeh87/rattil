@@ -111,5 +111,6 @@ Route::group([
     {
         Route::post('/favorites/{model}', 'Api\V1\FavoritesController@favorite');
         Route::delete('/favorites/{model}', 'Api\V1\FavoritesController@unfavorite');
+        Route::get('/profiles/{model}/favorites', 'Api\V1\FavoritesController@favorites');
     });
 });
