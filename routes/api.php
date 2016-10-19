@@ -99,4 +99,16 @@ Route::group([
         Route::get('/profiles/{model}/followers', 'Api\V1\FollowersController@followers');
         Route::get('/profiles/{model}/following', 'Api\V1\FollowersController@following');
     });
+
+    //--------------------------------------------------------|
+    //                     Favorites APIs                     |
+    //--------------------------------------------------------|
+    Route::group([
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::post('/favorites/{model}', 'Api\V1\FavoritesController@favorite');
+    });
 });
