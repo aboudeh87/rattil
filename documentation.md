@@ -643,3 +643,72 @@ and include the needed method as an extra parameter `_method`.
 }
 ```
 
+---
+
+## Favorites system 
+
+#### Favorite a recitation
+
+* _url:_ `/favorites/{model}` // `{model}` is the `ID` of recitation
+* _method_: `POST`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+#### Un-Favorite a recitation
+
+* _url:_ `/favorites/{model}` // `{model}` is the `ID` of recitation
+* _method_: `DELETE`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
+#### Favorites list of an user
+
+* _url:_ `/profiles/{model}/favorites` // `{model}` is the `username` or `ID` of user.
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+    "total": 1,
+    "limit": 15,
+    "currentPage": 1,
+    "data": [ // Array of favorites recitations
+{
+      "id": 2,
+      "slug": "xxxx",
+      "user": {
+        "id": 4,
+        "name": "abdulkader",
+        "username": "abd",
+        "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
+        "country": null,
+        "recitations_count": 1
+      },
+      "narration": {
+        "id": 1,
+        "name": "Test",
+        "weight": 2
+      },
+      "fromVerse": {
+        "id": 1,
+        "number": 1,
+        "text": "ssss",
+        "cleanText": "ssss",
+        "characters": "sss"
+      },
+      "toVerse": {
+        "id": 2,
+        "number": 2,
+        "text": "dddd",
+        "cleanText": "dddd",
+        "characters": "dddd"
+      },
+      "date": 1476232607,
+      "commentsCount": 0,
+      "favoritesCount": 0,
+      "likesCount": 0
+    }    ]
+}
+```
