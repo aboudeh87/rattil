@@ -7,6 +7,7 @@ use App\User;
 use App\Recitation;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
+use App\Transformers\V1\RecitationTransformer;
 
 class FavoritesController extends ApiController
 {
@@ -58,6 +59,34 @@ class FavoritesController extends ApiController
         $model->favorators()->where(['user_id' => $user->id])->delete();
 
         return $this->favoriteRemovedSuccess();
+    }
+
+    /**
+     * Return favorites list of an user
+     *
+     * @param string|null $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function favorites($model = null)
+    {
+        if (!$this->isAllowed($model))
+        {
+            return $this->accessDeniedResponse();
+        }
+
+        return $this->respondWithPagination(
+            Recitation::whereIn(
+                'id',
+                $this->model
+                    ->favorites()
+                    ->where('favoritable_type', Recitation::class)
+                    ->get()
+                    ->pluck('id')
+                    ->toArray()
+            )->paginate(),
+            new RecitationTransformer
+        );
     }
 
     /**
