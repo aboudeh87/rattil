@@ -9,5 +9,6 @@ return [
     'user_followed_success'    => ':name followed successfully.',
     'user_unfollowed_success'  => ':name un-followed successfully.',
     'follower_deleted_success' => 'The follower deleted successfully.',
-    'recitation_removed'       => 'Recitation removed by admin.',
+    'recitation_removed'       => 'Recitation has been removed by admin.',
+    'favorite_success'         => 'Recitation has been added successfully to favorites.',
 ];
