@@ -595,7 +595,7 @@ and include the needed method as an extra parameter `_method`.
 
 #### The followers list of an user
 
-* _url:_ `/follows/{model}/followers` // `{model}` is the `username` or `ID` of user.
+* _url:_ `/profiles/{model}/followers` // `{model}` is the `username` or `ID` of user.
 * _method_: `GET`
 * Authentication ***Required***
 * _response_: a `JSON` response like: 
@@ -620,7 +620,7 @@ and include the needed method as an extra parameter `_method`.
 
 #### The following list of an user
 
-* _url:_ `/follows/{model}/following` // `{model}` is the `username` or `ID` of user.
+* _url:_ `/profiles/{model}/following` // `{model}` is the `username` or `ID` of user.
 * _method_: `GET`
 * Authentication ***Required***
 * _response_: a `JSON` response like: 

@@ -88,16 +88,15 @@ Route::group([
     //                     Follow APIs                     |
     //--------------------------------------------------------|
     Route::group([
-        'prefix'     => '/follows',
         'middleware' => [
 //            'auth:api',
         ],
     ], function ()
     {
-        Route::post('/{model}', 'Api\V1\FollowersController@follow');
-        Route::delete('/{model}', 'Api\V1\FollowersController@unfollow');
-        Route::delete('/{model}/follower', 'Api\V1\FollowersController@deleteFollower');
-        Route::get('/{model}/followers', 'Api\V1\FollowersController@followers');
-        Route::get('/{model}/following', 'Api\V1\FollowersController@following');
+        Route::post('/follows/{model}', 'Api\V1\FollowersController@follow');
+        Route::delete('/follows/{model}', 'Api\V1\FollowersController@unfollow');
+        Route::delete('/follows/{model}/follower', 'Api\V1\FollowersController@deleteFollower');
+        Route::get('/profiles/{model}/followers', 'Api\V1\FollowersController@followers');
+        Route::get('/profiles/{model}/following', 'Api\V1\FollowersController@following');
     });
 });
