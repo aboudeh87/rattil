@@ -39,6 +39,28 @@ class FavoritesController extends ApiController
     }
 
     /**
+     * Un-Favorite a recitation
+     *
+     * @param Recitation $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unfavorite(Recitation $model)
+    {
+        if ($this->checkIfRecitationDisabled($model))
+        {
+            return $this->respondError(trans('messages.recitation_removed'));
+        }
+
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $model->favorators()->where(['user_id' => $user->id])->delete();
+
+        return $this->favoriteRemovedSuccess();
+    }
+
+    /**
      * Return success response after favorite a recitation
      *
      * @return \Illuminate\Http\JsonResponse
@@ -46,5 +68,15 @@ class FavoritesController extends ApiController
     protected function favoriteAddedSuccess()
     {
         return $this->respondSuccess(trans('messages.favorite_success'));
+    }
+
+    /**
+     * Return success response after remove recitation from favorites
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function favoriteRemovedSuccess()
+    {
+        return $this->respondSuccess(trans('messages.unfavorite_success'));
     }
 }

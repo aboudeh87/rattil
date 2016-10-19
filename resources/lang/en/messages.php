@@ -11,4 +11,5 @@ return [
     'follower_deleted_success' => 'The follower deleted successfully.',
     'recitation_removed'       => 'Recitation has been removed by admin.',
     'favorite_success'         => 'Recitation has been added successfully to favorites.',
+    'unfavorite_success'       => 'Recitation removed from favorites successfully.',
 ];
