@@ -585,6 +585,14 @@ and include the needed method as an extra parameter `_method`.
 * _response_: normal `Success response`.
 
 
+#### Delete a follower
+
+* _url:_ `/follows/{model}/follower` // `{model}` is the `User ID` or `username` to delete
+* _method_: `DELETE`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
 #### The followers list of an user
 
 * _url:_ `/follows/{model}/followers` // `{model}` is the `username` or `ID` of user.
