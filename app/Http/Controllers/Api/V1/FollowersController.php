@@ -69,6 +69,29 @@ class FollowersController extends ApiController
     }
 
     /**
+     * Delete a follower user for current user
+     *
+     * @param $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteFollower($model)
+    {
+        $model = $this->getUserModel($model);
+
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $model->following()
+            ->where([
+                'followable_type' => User::class,
+                'followable_id'   => $user->id,
+            ])->delete();
+
+        return $this->handleDeleteFollowerSuccessResponse();
+    }
+
+    /**
      * Return The following users of a specific user
      *
      * @param null|string $model
@@ -163,5 +186,15 @@ class FollowersController extends ApiController
         return $this->respondSuccess(
             trans('messages.user_unfollowed_success', ['name' => $model->name])
         );
+    }
+
+    /**
+     * return success response after Delete a follower
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function handleDeleteFollowerSuccessResponse()
+    {
+        return $this->respondSuccess(trans('messages.follower_deleted_success'));
     }
 }
