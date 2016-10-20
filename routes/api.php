@@ -87,6 +87,11 @@ Route::group([
                 \App\Http\Middleware\DisabledRecitation::class,
                 \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
             ]);
+
+        Route::delete('/comments/{model}', 'Api\V1\CommentController@destroy')
+            ->middleware([
+                \App\Http\Middleware\IsOwner::class . ':model,api',
+            ]);
     });
 
     //--------------------------------------------------------|
