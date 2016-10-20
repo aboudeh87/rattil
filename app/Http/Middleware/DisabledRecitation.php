@@ -26,7 +26,7 @@ class DisabledRecitation
             return new JsonResponse([
                 'success' => false,
                 'message' => trans('messages.recitation_removed'),
-            ]);
+            ], 404);
         }
 
         return $next($request);
