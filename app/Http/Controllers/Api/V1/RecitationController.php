@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use App\Events\NewRecitationPosted;
-use App\Http\Requests\RecitationRequest;
+use App\Http\Requests\StoreRecitationRequest;
+use App\Http\Requests\UpdateRecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
 
 class RecitationController extends ApiController
@@ -117,11 +118,11 @@ class RecitationController extends ApiController
     /**
      * Create a new model instance
      *
-     * @param \App\Http\Requests\RecitationRequest $request
+     * @param \App\Http\Requests\StoreRecitationRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(RecitationRequest $request)
+    public function store(StoreRecitationRequest $request)
     {
 
         $model = new Recitation($request->all());

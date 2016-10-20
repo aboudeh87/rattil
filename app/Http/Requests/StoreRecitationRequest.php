@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RecitationRequest extends FormRequest
+class StoreRecitationRequest extends FormRequest
 {
 
     /**
@@ -26,7 +26,7 @@ class RecitationRequest extends FormRequest
     public function rules()
     {
         return [
-            'description'  => 'required|max:255',
+            'description'  => 'max:255',
             'sura_id'      => 'required|exists:suwar,id',
             'narration_id' => 'required|exists:narrations,id',
             'from_verse'   => 'required|exists:verses,id',
@@ -34,7 +34,6 @@ class RecitationRequest extends FormRequest
             'file'         => 'required|file',
             'mentions'     => 'array',
             'mentions.*'   => 'exists:users,id',
-
         ];
     }
 }
