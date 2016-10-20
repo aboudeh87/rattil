@@ -735,3 +735,10 @@ and include the needed method as an extra parameter `_method`.
     * `text` ***required*** // Comment text
     * `file` ***optional*** // audio file. Only for **certified** users
 * _response_: normal `Success response`.
+
+#### Delete a comment
+
+* _url:_ `/comments/{model}` // `{model}` is the `ID` of Comment
+* _method_: `DELETE`
+* Authentication ***required***
+* _response_: normal `Success response`.
