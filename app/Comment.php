@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string                                             $commentable_type
  * @property integer                                            $commentable_id
  * @property string                                             $text
+ * @property string                                             $url
  * @property \Carbon\Carbon                                     $created_at
  * @property \Carbon\Carbon                                     $updated_at
  * @property \Carbon\Carbon                                     $deleted_at

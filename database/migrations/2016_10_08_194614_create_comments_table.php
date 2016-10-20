@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->string('commentable_type');
             $table->integer('commentable_id', false, true);
             $table->text('text');
+            $table->text('url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
