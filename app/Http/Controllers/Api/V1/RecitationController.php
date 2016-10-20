@@ -180,30 +180,6 @@ class RecitationController extends ApiController
     }
 
     /**
-     * Add a new comment for a recitation model
-     *
-     * @param \App\Http\Requests\CommentRequest $request
-     * @param \App\Recitation                   $model
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function comment(CommentRequest $request, Recitation $model)
-    {
-        $comment = new Comment;
-        $comment->text = $request->get('text', null);
-        $comment->user_id = $this->user->id;
-
-        if (!$this->user->certified)
-        {
-            // TODO save the file and save the URL to comment model
-        }
-
-        $model->comments()->save($comment);
-
-        return $this->respondSuccess(trans('messages.comment_posted'));
-    }
-
-    /**
      * Search in recitation
      *
      * @param \Illuminate\Http\Request $request
