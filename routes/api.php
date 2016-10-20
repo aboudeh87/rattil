@@ -66,10 +66,11 @@ Route::group([
         Route::get('/popular', 'Api\V1\RecitationController@popular');
         Route::post('/search', 'Api\V1\RecitationController@search');
         Route::get('/list/{model?}', 'Api\V1\RecitationController@recitations');
+        Route::post('/{model}', 'Api\V1\RecitationController@update');
         Route::get('/{model}', 'Api\V1\RecitationController@show')->middleware([
             \App\Http\Middleware\DisabledRecitation::class,
+            \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
         ]);
-        Route::post('/{model}', 'Api\V1\RecitationController@update');
     });
 
     //--------------------------------------------------------|
