@@ -150,7 +150,6 @@ class RecitationController extends ApiController
      */
     public function update(UpdateRecitationRequest $request, Recitation $model)
     {
-
         $model->description = $request->get('description', null);
         $model->save();
 

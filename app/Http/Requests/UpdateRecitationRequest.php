@@ -15,7 +15,9 @@ class UpdateRecitationRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $model = $this->route()->parameter('model');
+
+        return $model->user_id === auth('api')->id();
     }
 
     /**
