@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\User;
+use App\Comment;
 use App\Recitation;
 use Illuminate\Http\Request;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use App\Events\RecitationUpdated;
 use App\Events\NewRecitationPosted;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\StoreRecitationRequest;
 use App\Http\Requests\UpdateRecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
@@ -132,6 +134,7 @@ class RecitationController extends ApiController
 
         $model->mentions()->sync($request->get('mentions', []));
 
+        // TODO change the path of saved file and add the url of file
         $file = $request->file('file');
         $file->storeAs('temp', $model->id . '.' . $file->extension(), 'local');
 
@@ -174,6 +177,30 @@ class RecitationController extends ApiController
                 $model->withCount('comments', 'favorators', 'likes')->first()
             )
         );
+    }
+
+    /**
+     * Add a new comment for a recitation model
+     *
+     * @param \App\Http\Requests\CommentRequest $request
+     * @param \App\Recitation                   $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function comment(CommentRequest $request, Recitation $model)
+    {
+        $comment = new Comment;
+        $comment->text = $request->get('text', null);
+        $comment->user_id = $this->user->id;
+
+        if (!$this->user->certified)
+        {
+            // TODO save the file and save the URL to comment model
+        }
+
+        $model->comments()->save($comment);
+
+        return $this->respondSuccess(trans('messages.comment_posted'));
     }
 
     /**
