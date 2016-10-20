@@ -74,6 +74,22 @@ Route::group([
     });
 
     //--------------------------------------------------------|
+    //                      Comments APIs                     |
+    //--------------------------------------------------------|
+    Route::group([
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::post('/recitations/{model}/comment', 'Api\V1\CommentController@store')
+            ->middleware([
+                \App\Http\Middleware\DisabledRecitation::class,
+                \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
+            ]);
+    });
+
+    //--------------------------------------------------------|
     //                      Profiles APIs                     |
     //--------------------------------------------------------|
     Route::group([
