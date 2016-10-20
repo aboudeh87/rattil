@@ -8,6 +8,7 @@ use App\Recitation;
 use Illuminate\Http\Request;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
+use App\Events\RecitationUpdated;
 use App\Events\NewRecitationPosted;
 use App\Http\Requests\StoreRecitationRequest;
 use App\Http\Requests\UpdateRecitationRequest;
@@ -154,6 +155,8 @@ class RecitationController extends ApiController
         $model->save();
 
         $model->mentions()->sync($request->get('mentions', []));
+
+        \Event::fire(new RecitationUpdated($model));
 
         return $this->respondSuccess(trans('messages.updated_success'));
     }
