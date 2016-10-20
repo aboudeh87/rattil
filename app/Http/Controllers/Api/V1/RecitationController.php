@@ -140,6 +140,25 @@ class RecitationController extends ApiController
     }
 
     /**
+     * Update a model instance
+     *
+     * @param \App\Http\Requests\UpdateRecitationRequest $request
+     * @param \App\Recitation                            $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateRecitationRequest $request, Recitation $model)
+    {
+
+        $model->description = $request->get('description', null);
+        $model->save();
+
+        $model->mentions()->sync($request->get('mentions', []));
+
+        return $this->respondSuccess(trans('messages.updated_success'));
+    }
+
+    /**
      * Return a specific model
      *
      * @param \App\Recitation $model
