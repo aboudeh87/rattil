@@ -169,11 +169,6 @@ class RecitationController extends ApiController
      */
     public function show(Recitation $model)
     {
-        if ($this->checkIfRecitationDisabled($model))
-        {
-            return $this->respondError(trans('messages.recitation_removed'));
-        }
-
         return $this->respond(
             (new RecitationTransformer)->setShow(true)->transform(
                 $model->withCount('comments', 'favorators', 'likes')->first()
