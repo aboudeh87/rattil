@@ -2,7 +2,7 @@
 
 return [
     'posted_success'           => 'Your recitation was added successfully.',
-    'privacy_access_denied'    => 'you cannot access this :module, it is a private :module.',
+    'privacy_access_denied'    => 'you cannot access this page, it is a private page.',
     'profile_updated_success'  => 'Your profile updated successfully.',
     'avatar_uploaded_success'  => 'Your new profile image uploaded successfully.',
     'avatar_deleted_success'   => 'Your profile image deleted successfully.',

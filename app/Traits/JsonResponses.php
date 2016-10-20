@@ -22,7 +22,7 @@ trait JsonResponses
      */
     protected function accessDeniedResponse($message = null)
     {
-        return $this->respondError($message ?: trans('messages.privacy_access_denied', ['module' => 'profile']), 403);
+        return $this->respondError($message ?: trans('messages.privacy_access_denied'), 403);
     }
 
     /**
