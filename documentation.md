@@ -379,6 +379,15 @@ and include the needed method as an extra parameter `_method`.
     * `mentions` ***optional*** // should be array of users IDs That mentioned in the post
 * _response_: normal `Success response`.
 
+#### Update Recitation
+
+* _url:_ `/recitations/{model}` // `{model}` is the `ID` of recitation
+* _method_: `POST`
+* Authentication ***required***
+* _parameters_:
+    * `description` ***optional*** // The comment on the recitation
+    * `mentions` ***optional*** // should be array of users IDs That mentioned in the post
+* _response_: normal `Success response`.
 
 #### Show Recitation information
 
@@ -712,3 +721,17 @@ and include the needed method as an extra parameter `_method`.
     }    ]
 }
 ```
+
+---
+
+# Comments
+
+#### Add a new comment
+
+* _url:_ `/recitations/{model}/comment` // `{model}` is the `ID` of recitation
+* _method_: `POST`
+* Authentication ***required***
+* _parameters_:
+    * `text` ***required*** // Comment text
+    * `file` ***optional*** // audio file. Only for **certified** users
+* _response_: normal `Success response`.
