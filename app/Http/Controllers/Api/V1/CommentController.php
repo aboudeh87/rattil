@@ -55,7 +55,7 @@ class CommentController extends ApiController
         $comment->text = $request->get('text', null);
         $comment->user_id = $this->user->id;
 
-        if (!$this->user->certified)
+        if ($this->user->certified)
         {
             // TODO save the file and save the URL to comment model
         }
@@ -63,5 +63,20 @@ class CommentController extends ApiController
         $model->comments()->save($comment);
 
         return $this->respondSuccess(trans('messages.comment_posted'));
+    }
+
+    /**
+     * delete a model instance
+     *
+     * @param \App\Comment $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Comment $model)
+    {
+        $model->delete();
+
+        // TODO delete the file after deleting the model
+        return $this->respondSuccess(trans('messages.comment_deleted'));
     }
 }

@@ -14,4 +14,5 @@ return [
     'unfavorite_success'       => 'Recitation removed from favorites successfully.',
     'updated_success'          => 'Your post updated successfully.',
     'comment_posted'           => 'Your comment added successfully.',
+    'comment_deleted'          => 'Your comment deleted successfully.',
 ];
