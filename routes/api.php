@@ -74,6 +74,10 @@ Route::group([
             \App\Http\Middleware\DisabledRecitation::class,
             \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
         ]);
+        Route::delete('/{model}', 'Api\V1\RecitationController@destroy')->middleware([
+            \App\Http\Middleware\DisabledRecitation::class,
+            \App\Http\Middleware\IsOwner::class,
+        ]);
     });
 
     //--------------------------------------------------------|
