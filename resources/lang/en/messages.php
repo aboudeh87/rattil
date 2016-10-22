@@ -10,6 +10,7 @@ return [
     'user_unfollowed_success'  => ':name un-followed successfully.',
     'follower_deleted_success' => 'The follower deleted successfully.',
     'recitation_removed'       => 'Recitation has been removed by admin.',
+    'recitation_deleted'       => 'Your recitation has been deleted successfully.',
     'favorite_success'         => 'Recitation has been added successfully to favorites.',
     'unfavorite_success'       => 'Recitation removed from favorites successfully.',
     'updated_success'          => 'Your post updated successfully.',

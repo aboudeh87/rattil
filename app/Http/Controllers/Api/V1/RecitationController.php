@@ -180,6 +180,20 @@ class RecitationController extends ApiController
     }
 
     /**
+     * delete a specific model
+     *
+     * @param \App\Recitation $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Recitation $model)
+    {
+        $model->delete();
+
+        return $this->respondSuccess(trans('messages.recitation_deleted'));
+    }
+
+    /**
      * Search in recitation
      *
      * @param \Illuminate\Http\Request $request
