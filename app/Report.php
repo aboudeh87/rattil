@@ -32,6 +32,11 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
 
+    const AVAILABLE_TYPES = [
+        'comments'    => Comment::class,
+        'recitations' => Recitation::class,
+    ];
+
     /**
      * The table associated with the model.
      *
