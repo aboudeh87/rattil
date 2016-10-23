@@ -62,7 +62,7 @@ class ReportController extends ApiController
         Report::create([
             'reportable_type' => $class,
             'reportable_id'   => $model->id,
-            'user_id'         => $model->id,
+            'user_id'         => $this->user->id,
             'reason_id'       => $request->get('reason_id'),
             'message'         => $request->get('message', null),
         ]);
