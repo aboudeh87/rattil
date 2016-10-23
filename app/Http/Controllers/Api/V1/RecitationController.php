@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\User;
-use App\Comment;
 use App\Recitation;
 use Illuminate\Http\Request;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use App\Events\RecitationUpdated;
 use App\Events\NewRecitationPosted;
-use App\Http\Requests\CommentRequest;
 use App\Http\Requests\StoreRecitationRequest;
 use App\Http\Requests\UpdateRecitationRequest;
 use App\Transformers\V1\RecitationTransformer;
