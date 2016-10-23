@@ -146,4 +146,19 @@ Route::group([
         Route::delete('/favorites/{model}', 'Api\V1\FavoritesController@unfavorite');
         Route::get('/profiles/{model}/favorites', 'Api\V1\FavoritesController@favorites');
     });
+
+    //--------------------------------------------------------|
+    //                      Reports APIs                      |
+    //--------------------------------------------------------|
+    Route::group([
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::post('/{type}/{model}/report', 'Api\V1\ReportController@store')
+            ->where([
+                'type' => implode('|', array_keys(\App\Report::AVAILABLE_TYPES)),
+            ]);
+    });
 });
