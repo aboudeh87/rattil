@@ -9,16 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * App\Comment
  *
- * @property integer                                            $id
- * @property integer                                            $user_id
- * @property string                                             $commentable_type
- * @property integer                                            $commentable_id
- * @property string                                             $text
- * @property string                                             $url
- * @property \Carbon\Carbon                                     $created_at
- * @property \Carbon\Carbon                                     $updated_at
- * @property \Carbon\Carbon                                     $deleted_at
- * @property-read \App\User                                     $user
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $commentable_type
+ * @property integer $commentable_id
+ * @property string $text
+ * @property boolean $verified
+ * @property string $url
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $model
  * @method static \Illuminate\Database\Query\Builder|\App\Comment whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Comment whereUserId($value)
