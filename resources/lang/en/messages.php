@@ -16,4 +16,8 @@ return [
     'updated_success'          => 'Your post updated successfully.',
     'comment_posted'           => 'Your comment added successfully.',
     'comment_deleted'          => 'Your comment deleted successfully.',
+    'recitations_is_verified'  => 'This post is verified, you cannot report it.',
+    'comments_is_verified'     => 'This comment is verified, you cannot report it.',
+    'already_reported'         => 'Already reported.',
+    'reported_success'         => 'We receive your report, we will check it ASAP.',
 ];
