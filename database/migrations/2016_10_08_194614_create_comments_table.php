@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('commentable_id', false, true);
             $table->text('text');
             $table->text('url')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
