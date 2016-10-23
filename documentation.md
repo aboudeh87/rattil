@@ -749,3 +749,17 @@ and include the needed method as an extra parameter `_method`.
 * _method_: `DELETE`
 * Authentication ***required***
 * _response_: normal `Success response`.
+
+---
+
+# Reports
+
+#### Report a model
+
+* _url:_ `/{type}/{model}/report` // `type` is the type of model [`recitations`|`comments`], `{model}` is the `ID` of model
+* _method_: `POST`
+* Authentication ***required***
+* _parameters_:
+    * `reason_id` ***required*** // Comment text
+    * `message` ***optional*** // description message, `max:500` characters
+* _response_: normal `Success response`.
