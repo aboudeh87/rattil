@@ -389,6 +389,13 @@ and include the needed method as an extra parameter `_method`.
     * `mentions` ***optional*** // should be array of users IDs That mentioned in the post
 * _response_: normal `Success response`.
 
+#### Delete Recitation
+
+* _url:_ `/recitations/{model}` // `{model}` is the `ID` of recitation
+* _method_: `Delete`
+* Authentication ***required***
+* _response_: normal `Success response`.
+
 #### Show Recitation information
 
 * _url:_ `/recitations/{model}` // `{model}` is The ID of Recitation
