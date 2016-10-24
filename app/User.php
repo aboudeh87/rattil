@@ -38,6 +38,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAvatar($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereActivationToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereApiToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
@@ -58,6 +59,7 @@ class User extends Authenticatable implements FollowableContract
         'username',
         'email',
         'password',
+        'activation_token',
     ];
 
     /**
@@ -69,6 +71,7 @@ class User extends Authenticatable implements FollowableContract
         'password',
         'remember_token',
         'api_token',
+        'activation_token',
     ];
 
     /**
