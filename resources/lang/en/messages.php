@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'logged_in_success'              => 'You logged in successfully.',
+    'logged_out_success'             => 'You are logged out.',
+    'registration_success'           => 'Congratulation, your account was created successfully, an activation email sent to your email, please go and activate your account .',
     'posted_success'                 => 'Your recitation was added successfully.',
     'privacy_access_denied'          => 'you cannot access this page, it is a private page.',
     'profile_updated_success'        => 'Your profile updated successfully.',

@@ -26,7 +26,7 @@ trait ApiLoginUser
 
         return $this->respond([
             'success' => true,
-            'message' => 'تم تسجيل الدخول بنجاح',
+            'message' => trans('messages.logged_in_success'),
             'user'    => [
                 'id'       => $user->id,
                 'name'     => $user->name,

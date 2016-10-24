@@ -62,13 +62,13 @@ class LoginController extends ApiController
      *
      * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function logout(Request $request)
     {
         $this->clearApiToken($this->guard('api')->user());
 
-        return $this->respondSuccess('تم تسجيل الخروج بنجاح.');
+        return $this->respondSuccess(trans('messages.logged_out_success'));
     }
 
     /**

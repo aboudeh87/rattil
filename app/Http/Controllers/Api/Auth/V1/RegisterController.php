@@ -42,6 +42,6 @@ class RegisterController extends ApiController
      */
     protected function registeredSuccessResponse()
     {
-        return $this->respondSuccess('لقد تم تسجيلك بنجاح');
+        return $this->respondSuccess(trans('messages.registration_success'));
     }
 }
