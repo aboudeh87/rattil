@@ -83,7 +83,6 @@ class CommentController extends ApiController
 
         \Storage::delete(self::PATH . $this->getFileName($model));
 
-        // TODO delete the file after deleting the model
         return $this->respondSuccess(trans('messages.comment_deleted'));
     }
 
