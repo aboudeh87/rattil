@@ -113,6 +113,16 @@ class LoginController extends ApiController
     }
 
     /**
+     * Return error response when the account not activated
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function sendShouldActivateResponse()
+    {
+        return $this->respondError(trans('messages.account_not_activated'), 403);
+    }
+
+    /**
      * Get the guard to be used during authentication.
      *
      * @param string|null $guard
