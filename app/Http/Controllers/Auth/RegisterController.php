@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\User;
 use App\Traits\RegistersUsers;
 use App\Http\Controllers\Controller;
 
@@ -40,5 +41,25 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Activate user account
+     *
+     * @param $token
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activate($token)
+    {
+        if (!$user = User::whereActivationToken($token)->first())
+        {
+            return view('auth.activation.invalid');
+        }
+
+        $user->activation_token = null;
+        $user->save();
+
+        return view('auth.activation.success');
     }
 }
