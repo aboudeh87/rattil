@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->boolean('certified')->default(false);
             $table->rememberToken();
             $table->string('api_token', 100)->nullable();
+            $table->string('activation_token', 100)->nullable();
             $table->timestamps();
         });
     }

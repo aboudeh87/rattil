@@ -19,6 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  * @property boolean $certified
  * @property string $remember_token
+ * @property string $activation_token
  * @property string $api_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
