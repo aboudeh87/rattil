@@ -19,6 +19,7 @@ Route::get('/', function ()
 });
 
 Auth::routes();
+Route::get('/activate/{token}', 'Auth\RegisterController@activate');
 
 //--------------------------------------------------------|
 //           Social Media Authentication routes           |
