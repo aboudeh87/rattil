@@ -75,6 +75,25 @@ class User extends Authenticatable implements FollowableContract
     ];
 
     /**
+     * Set Username attribute
+     *
+     * @param null|string $value
+     */
+    public function setUsernameAttribute($value = null)
+    {
+        $this->attributes['username'] = $value ? strtolower($value) : null;
+    }
+
+    /**
+     * Set email attribute
+     *
+     * @param null $value
+     */
+    public function setEmailAttribute($value = null)
+    {
+        $this->attributes['email'] = $value ? strtolower($value) : null;
+    }
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function socials()
