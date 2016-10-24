@@ -9,11 +9,14 @@ use App\Recitation;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use App\Http\Requests\CommentRequest;
+use Illuminate\Http\UploadedFile;
 
 class CommentController extends ApiController
 {
 
     use ProfilesChecker, JsonResponses;
+
+    const PATH = 'public/comments/';
 
     /**
      * Logged in user
@@ -51,7 +54,12 @@ class CommentController extends ApiController
 
         if ($this->user->certified)
         {
-            // TODO save the file and save the URL to comment model
+            $file = $request->file('file');
+
+            if ($file instanceof UploadedFile)
+            {
+                $file->storeAs(self::PATH, $this->getFileName($comment));
+            }
         }
 
         $model->comments()->save($comment);
@@ -72,5 +80,17 @@ class CommentController extends ApiController
 
         // TODO delete the file after deleting the model
         return $this->respondSuccess(trans('messages.comment_deleted'));
+    }
+
+    /**
+     * Get the file name of the model
+     *
+     * @param \App\Comment $model
+     *
+     * @return string
+     */
+    protected function getFileName(Comment $model)
+    {
+        return md5('comment-' . $model->id);
     }
 }
