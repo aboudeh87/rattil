@@ -189,6 +189,8 @@ class RecitationController extends ApiController
     {
         $model->delete();
 
+        \Storage::delete(self::PATH . $this->getFileName($model));
+
         return $this->respondSuccess(trans('messages.recitation_deleted'));
     }
 
