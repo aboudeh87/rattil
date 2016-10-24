@@ -19,6 +19,8 @@ class RecitationController extends ApiController
 
     use ProfilesChecker, JsonResponses;
 
+    const PATH = 'public/recitations/';
+
     /**
      * Logged in user
      *
@@ -132,9 +134,8 @@ class RecitationController extends ApiController
 
         $model->mentions()->sync($request->get('mentions', []));
 
-        // TODO change the path of saved file and add the url of file
         $file = $request->file('file');
-        $file->storeAs('temp', $model->id . '.' . $file->extension(), 'local');
+        $file->storeAs(self::PATH, $this->getFileName($model));
 
         \Event::fire(new NewRecitationPosted($model, $file));
 
@@ -264,5 +265,17 @@ class RecitationController extends ApiController
             ->get(['id'])
             ->pluck('id')
             ->toArray();
+    }
+
+    /**
+     * Get the file name of the model
+     *
+     * @param \App\Recitation $model
+     *
+     * @return string
+     */
+    protected function getFileName(Recitation $model)
+    {
+        return md5('recitation-' . $model->id);
     }
 }
