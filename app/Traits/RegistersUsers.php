@@ -3,10 +3,12 @@
 namespace App\Traits;
 
 
+use Hash;
 use Auth;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use App\Mail\ActivationMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 
@@ -41,7 +43,7 @@ trait RegistersUsers
 
         event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+        \Mail::to($user->email)->send(New ActivationMail($user));
 
         return $this->registeredSuccessResponse();
     }
@@ -95,10 +97,11 @@ trait RegistersUsers
     protected function create(array $data)
     {
         return User::create([
-            'name'     => $data['name'],
-            'username' => $data['username'] ?: null,
-            'email'    => $data['email'] ?: null,
-            'password' => bcrypt($data['password']),
+            'name'             => $data['name'],
+            'username'         => $data['username'] ?: null,
+            'email'            => $data['email'] ?: null,
+            'password'         => bcrypt($data['password']),
+            'activation_token' => Hash::make(str_random(60)),
         ]);
     }
 }
