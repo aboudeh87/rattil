@@ -81,7 +81,10 @@ class CommentController extends ApiController
     {
         $model->delete();
 
-        \Storage::delete(self::PATH . $this->getFileName($model));
+        if ($model->url)
+        {
+            \Storage::delete(self::PATH . $this->getFileName($model));
+        }
 
         return $this->respondSuccess(trans('messages.comment_deleted'));
     }
