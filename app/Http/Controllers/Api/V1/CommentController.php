@@ -8,8 +8,8 @@ use App\Comment;
 use App\Recitation;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
-use App\Http\Requests\CommentRequest;
 use Illuminate\Http\UploadedFile;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends ApiController
 {
@@ -51,6 +51,7 @@ class CommentController extends ApiController
         $comment = new Comment;
         $comment->text = $request->get('text', null);
         $comment->user_id = $this->user->id;
+        $model->comments()->save($comment);
 
         if ($this->user->certified)
         {
@@ -58,11 +59,13 @@ class CommentController extends ApiController
 
             if ($file instanceof UploadedFile)
             {
-                $file->storeAs(self::PATH, $this->getFileName($comment));
+                $filename = $this->getFileName($comment);
+
+                $file->storeAs(self::PATH, $filename);
+                $comment->url = \Request::root() . '/' . self::PATH . $filename;
+                $comment->save();
             }
         }
-
-        $model->comments()->save($comment);
 
         return $this->respondSuccess(trans('messages.comment_posted'));
     }
@@ -77,6 +80,8 @@ class CommentController extends ApiController
     public function destroy(Comment $model)
     {
         $model->delete();
+
+        \Storage::delete(self::PATH . $this->getFileName($model));
 
         // TODO delete the file after deleting the model
         return $this->respondSuccess(trans('messages.comment_deleted'));
