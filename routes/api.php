@@ -175,5 +175,9 @@ Route::group([
         Route::get('/countries', 'Api\V1\AssistsController@countries');
         Route::get('/languages', 'Api\V1\AssistsController@languages');
         Route::get('/narrations', 'Api\V1\AssistsController@narrations');
+        Route::get('/reasons/{type}', 'Api\V1\AssistsController@reasons')
+            ->where([
+                'type' => implode('|', array_keys(\App\Report::AVAILABLE_TYPES)),
+            ]);
     });
 });
