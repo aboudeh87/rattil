@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\Reason;
 use App\Country;
 use App\Language;
 use App\Narration;
+use App\Report;
 
 class AssistsController extends ApiController
 {
@@ -71,6 +73,32 @@ class AssistsController extends ApiController
                         'id'     => $model->id,
                         'weight' => $model->weight,
                         'name'   => $name ? $name->name : $model->names->first()->name,
+                    ];
+                })
+                ->toArray()
+        );
+    }
+
+    /**
+     * Return reasons list
+     *
+     * @param string $type
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reasons($type)
+    {
+        return $this->respond(
+            Reason::with('content')
+                ->whereModel(Report::AVAILABLE_TYPES[$type])
+                ->get()
+                ->map(function (Reason $model)
+                {
+                    $name = $model->content->where('language_key', \App::getLocale())->first();
+
+                    return [
+                        'id'   => $model->id,
+                        'name' => $name ? $name->text : $model->content->first()->text,
                     ];
                 })
                 ->toArray()
