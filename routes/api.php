@@ -174,5 +174,6 @@ Route::group([
     {
         Route::get('/countries', 'Api\V1\AssistsController@countries');
         Route::get('/languages', 'Api\V1\AssistsController@languages');
+        Route::get('/narrations', 'Api\V1\AssistsController@narrations');
     });
 });
