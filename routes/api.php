@@ -161,4 +161,17 @@ Route::group([
                 'type' => implode('|', array_keys(\App\Report::AVAILABLE_TYPES)),
             ]);
     });
+
+    //--------------------------------------------------------|
+    //                      Assists APIs                      |
+    //--------------------------------------------------------|
+    Route::group([
+        'prefix'     => '/assists',
+        'middleware' => [
+//            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::get('/countries', 'Api\V1\AssistsController@countries');
+    });
 });
