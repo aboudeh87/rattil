@@ -56,7 +56,7 @@ Route::group([
     Route::group([
         'prefix'     => '/recitations',
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -85,7 +85,7 @@ Route::group([
     //--------------------------------------------------------|
     Route::group([
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -106,7 +106,7 @@ Route::group([
     //--------------------------------------------------------|
     Route::group([
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -122,7 +122,7 @@ Route::group([
     //--------------------------------------------------------|
     Route::group([
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -138,7 +138,7 @@ Route::group([
     //--------------------------------------------------------|
     Route::group([
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -152,7 +152,7 @@ Route::group([
     //--------------------------------------------------------|
     Route::group([
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
@@ -168,7 +168,7 @@ Route::group([
     Route::group([
         'prefix'     => '/assists',
         'middleware' => [
-//            'auth:api',
+            'auth:api',
         ],
     ], function ()
     {
