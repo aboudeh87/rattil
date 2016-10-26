@@ -37,6 +37,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAvatar($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereCertified($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereActivationToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereApiToken($value)

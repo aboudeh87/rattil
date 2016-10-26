@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use Image;
 use Storage;
+use App\User;
 use Illuminate\Http\Request;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ProfileRequest;
+use App\Transformers\V1\UserTransformer;
 use App\Transformers\V1\ProfileTransformer;
 
 class ProfileController extends ApiController
@@ -87,6 +89,42 @@ class ProfileController extends ApiController
         }
 
         return $this->returnProfileResponse();
+    }
+
+    /**
+     * Search in users profile
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'query'     => 'required|min:2',
+            'certified' => 'required|min:2',
+        ]);
+
+        $string = $request->get('query');
+
+        $models = User::where(function ($query) use ($string)
+        {
+            $keyword = '%' . str_replace(' ', '%', $string) . '%';
+
+            $query->where('username', 'like', $keyword)
+                ->orWhere('name', 'like', $keyword)
+                ->orWhere('email', $string);
+        });
+
+        if ($request->get('certified', null) !== null)
+        {
+            $models->where('certified', (bool) $request->get('certified'));
+        }
+
+        return $this->respondWithPagination(
+            $models->paginate(),
+            new UserTransformer
+        );
     }
 
     /**
