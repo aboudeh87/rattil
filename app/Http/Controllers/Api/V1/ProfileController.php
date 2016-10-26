@@ -102,7 +102,7 @@ class ProfileController extends ApiController
     {
         $this->validate($request, [
             'query'     => 'required|min:2',
-            'certified' => 'required|min:2',
+            'certified' => 'boolean',
         ]);
 
         $string = $request->get('query');
