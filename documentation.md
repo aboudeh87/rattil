@@ -17,7 +17,42 @@ and include the needed method as an extra parameter `_method`.
     * [Register](#register)
     * [Reset password request](#reset-password-request)
     * [Social media authentication](#social-media-authentication)
+- [Suwar](#suwar)
+    * [Suwar list](#suwar-list)
+    * [Show Sura information](#show-sura-information)
+- [Recitations](#recitations)
+    * [recitation list of an user](#recitation-list-of-an-user)
+    * [Recitation list of followed people](#recitation-list-of-followed-people)
+    * [Latest recitations list](#latest-recitations-list)
+    * [Popular recitations list](#popular-recitations-list)
+    * [Post new Recitation](#post-new-recitation)
+    * [Update Recitation](#update-recitation)
+    * [Delete Recitation](#delete-Recitation)
+    * [Show Recitation information](#show-recitation-information)
+    * [Search Recitations](#search-recitations)
+- [Profiles](#profiles)
+    * [Update profile](#update-profile)
+    * [Upload a profile image](#upload-a-profile-image)
+    * [Delete profile image](#delete-profile-image)
+    * [Show profile information](#show-profile-information)
+    * [Search users](#search-users)
+- [Follow system](#follow-system)
+    * [Follow an user](#follow-an-user)
+    * [Un-Follow an user](#un-Follow-an-user)
+    * [Delete a follower](#delete-a-follower)
+    * [The followers list of an user](#the-followers-list-of-an-user)
+    * [The following list of an user](#the-following-list-of-an-user)
+- [Favorites system](#favorites-system)
+    * [Favorite a recitation](#favorite-a-recitation)
+    * [Un-Favorite a recitation](#un-favorite-a-recitation)
+    * [Favorites list of an user](#favorites-list-of-an-user)
+- [Comments](#comments)
+    * [Add a new comment](#add-a-new-comment)
+    * [Delete a comment](#delete-a-comment)
+- [Reports](#reports)
+    * [Report a model](#report-a-model)
     
+---
     
 #### Responses
 
@@ -774,7 +809,7 @@ and include the needed method as an extra parameter `_method`.
 
 ---
 
-# Comments
+## Comments
 
 #### Add a new comment
 
@@ -795,7 +830,7 @@ and include the needed method as an extra parameter `_method`.
 
 ---
 
-# Reports
+## Reports
 
 #### Report a model
 
