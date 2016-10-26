@@ -10,7 +10,7 @@ and include the needed method as an extra parameter `_method`.
 
 ### Index
 
-- [Responses]#responses)
+- [Responses][]
 - [Authentication](#authentication)
     * [Login](#login)
     * [Logout](#logout)
