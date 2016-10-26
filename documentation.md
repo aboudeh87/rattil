@@ -578,7 +578,39 @@ and include the needed method as an extra parameter `_method`.
     "city": "Al Riyad",
     "gender": "male",
     "email_notification": 1, // This variable will return only if the profile is for logged in user
-    "private": 0 // This variable will return only if the profile is for logged in user
+    "private": 0, // This variable will return only if the profile is for logged in user
+    "followers_count": 0, 
+    "following_count": 0,
+    "favorites_count": 0,
+    "recitations_count": 0
+}
+```
+
+#### Search users
+
+* _url:_ `/users/search`
+* _method_: `GET`
+* _parameters_:
+    * `query` ***required*** // minimum `2` characters. search keyword 
+    * `certified` ***optional*** // `boolean`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+  "total": 3,
+  "limit": 15,
+  "currentPage": 1,
+  "data": [
+    {
+      "id": 7,
+      "name": "Abdul Kader Zein Eddin",
+      "username": "abd",
+      "avatar": null,
+      "country": "tr",
+      "recitations_count": 0
+    }
+  ]
 }
 ```
 
