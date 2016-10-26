@@ -51,6 +51,11 @@ and include the needed method as an extra parameter `_method`.
     * [Delete a comment](#delete-a-comment)
 - [Reports](#reports)
     * [Report a model](#report-a-model)
+- [Assists APIs](#assists-apis)
+    * [Languages list](#languages-list)
+    * [Countries list](#countries-list)
+    * [Narrations list](#narrations-list)
+    * [Reasons list](#reasons-list)
     
 ---
     
@@ -841,3 +846,83 @@ and include the needed method as an extra parameter `_method`.
     * `reason_id` ***required*** // Comment text
     * `message` ***optional*** // description message, `max:500` characters
 * _response_: normal `Success response`.
+
+---
+
+## Assists APIs
+
+#### Languages list
+
+* _url:_ `/assists/languages`
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like: 
+
+```json
+[
+    {
+        "key": "en",
+        "name": "English"
+    },
+    {
+        "key": "ar",
+        "name": "العربية"
+    }
+]
+```
+
+#### Countries list
+
+* _url:_ `/assists/countries`
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like: 
+
+```json
+[
+    {
+        "key": "sa",
+        "name": "Saudi Arabia"
+    },
+    {
+        "key": "tr",
+        "name": "Turkey"
+    }
+]
+```
+
+#### Narrations list
+
+* _url:_ `/assists/narrations`
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like: 
+
+```json
+[
+    {
+        "id": 1,
+        "weight": 1,
+        "name": "Test narration"
+    }
+]
+```
+
+#### Reasons list
+
+Get the list of report's reasons.  
+It is related to the model that you want to report it.
+
+* _url:_ `/assists/reasons/{type}` //available [`comments`|`recitations`]
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like: 
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Reason of report"
+    }
+]
+```
