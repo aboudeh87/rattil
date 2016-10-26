@@ -105,16 +105,16 @@ Route::group([
     //                      Profiles APIs                     |
     //--------------------------------------------------------|
     Route::group([
-        'prefix'     => '/profiles',
         'middleware' => [
 //            'auth:api',
         ],
     ], function ()
     {
-        Route::post('/', 'Api\V1\ProfileController@update');
-        Route::get('/{model?}', 'Api\V1\ProfileController@show');
-        Route::post('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
-        Route::delete('/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
+        Route::post('/profiles/', 'Api\V1\ProfileController@update');
+        Route::get('/profiles/{model?}', 'Api\V1\ProfileController@show');
+        Route::post('/profiles/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
+        Route::delete('/profiles/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
+        Route::get('/users/search', 'Api\V1\ProfileController@search');
     });
 
     //--------------------------------------------------------|
