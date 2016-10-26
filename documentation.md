@@ -10,12 +10,13 @@ and include the needed method as an extra parameter `_method`.
 
 ### Index
 
-- [Responses][]
+- [Responses](#responses)
 - [Authentication](#authentication)
     * [Login](#login)
     * [Logout](#logout)
     * [Register](#register)
-    * [Reset password request][]
+    * [Reset password request](#reset-password-request)
+    * [Social media authentication](#social-media-authentication)
     
     
 #### Responses
