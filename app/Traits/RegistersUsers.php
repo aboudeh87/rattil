@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 
-use Hash;
 use Auth;
 use App\User;
 use Validator;

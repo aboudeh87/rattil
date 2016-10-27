@@ -89,6 +89,16 @@ trait AuthenticatesUsers
     }
 
     /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
+    }
+
+    /**
      * Return error response when the account not activated
      *
      * @return \Illuminate\Http\RedirectResponse
