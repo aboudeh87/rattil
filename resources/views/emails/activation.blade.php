@@ -8,7 +8,7 @@
 <br>
 
 <a href="{{ action('Auth\RegisterController@activate', [$user->activation_token]) }}">
-    {{ $user->activation_token }}
+    {{ action('Auth\RegisterController@activate', [$user->activation_token]) }}
 </a>
 
 <br>
