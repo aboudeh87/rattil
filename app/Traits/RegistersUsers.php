@@ -101,7 +101,7 @@ trait RegistersUsers
             'username'         => $data['username'] ?: null,
             'email'            => $data['email'] ?: null,
             'password'         => bcrypt($data['password']),
-            'activation_token' => Hash::make(str_random(60)),
+            'activation_token' => str_random(60),
         ]);
     }
 }
