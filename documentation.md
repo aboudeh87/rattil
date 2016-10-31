@@ -79,6 +79,19 @@ and include the needed method as an extra parameter `_method`.
 }
 ```
 
+**Validation error response:**
+```json
+{
+    "success": false,
+    "message": "Error text message",
+    "errors": {
+        "field-name": [ // array of errors messages
+            "Error text message"
+        ]
+    }
+}
+```
+
 ---
 
 ## Authentication 
