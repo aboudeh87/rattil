@@ -3,9 +3,7 @@
 namespace App\Http\Requests;
 
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StoreRecitationRequest extends FormRequest
+class StoreRecitationRequest extends Request
 {
 
     /**
