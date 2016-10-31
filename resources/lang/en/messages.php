@@ -26,4 +26,6 @@ return [
     'invalid_activation_token'       => 'Invalid activation token!.',
     'your_account_activated_success' => 'Congratulation, your account has been activated successfully, you can now login and start using our website.',
     'account_not_activated'          => 'This account not activated yet, please go to your email, open the activation email and click on activation link.',
+    'data_validation_error'          => 'Data validation failed!',
+    'unauthenticated'                => 'Unauthenticated!',
 ];
