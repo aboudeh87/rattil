@@ -3,6 +3,8 @@
 To send authenticated request, add `Authorization` header to the request with 
 `Bearer {token}` value.
 
+To get `JSON` responses, add `Accept` header with `application/json` value.
+
 All the URIs in this documentation has a prefix: `/api/v1/`.
 
 APIs That need methods (`PUT`, `PATCH`), it should sent as `POST` request
