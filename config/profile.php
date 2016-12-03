@@ -13,7 +13,6 @@ return [
 
     // This properties only available for owner
     'owner' => [
-        'private',
         'email_notification',
     ],
 ];
