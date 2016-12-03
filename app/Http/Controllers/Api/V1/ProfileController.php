@@ -11,7 +11,6 @@ use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ProfileRequest;
-use App\Transformers\V1\UserTransformer;
 use App\Transformers\V1\ProfileTransformer;
 
 class ProfileController extends ApiController
@@ -123,7 +122,7 @@ class ProfileController extends ApiController
 
         return $this->respondWithPagination(
             $models->paginate(),
-            new UserTransformer
+            new ProfileTransformer
         );
     }
 
