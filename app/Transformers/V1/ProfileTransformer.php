@@ -63,6 +63,6 @@ class ProfileTransformer extends Transformer
      */
     protected function cacheKey(Model $model)
     {
-        return 'profile_' . $model->getKey() . '_' . ($model->getKey() === auth('api')->id()) . $model->updated_at;
+        return 'profile_' . $model->getKey() . '_' . ($model->getKey() === auth('api')->id()) . '_' . $model->updated_at;
     }
 }
