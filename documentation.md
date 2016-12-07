@@ -251,7 +251,8 @@ and include the needed method as an extra parameter `_method`.
         "id": 4,
         "name": "AbdulKader",
         "username": "abd",
-        "avatar": null
+        "avatar": null,
+        "certified": false
       },
       "narration": { // Narration information
         "id": 1,
@@ -301,7 +302,8 @@ and include the needed method as an extra parameter `_method`.
         "id": 4,
         "name": "AbdulKader",
         "username": "abd",
-        "avatar": null
+        "avatar": null,
+        "certified": false
       },
       "narration": { // Narration information
         "id": 1,
@@ -351,7 +353,8 @@ and include the needed method as an extra parameter `_method`.
         "id": 4,
         "name": "AbdulKader",
         "username": "abd",
-        "avatar": null
+        "avatar": null,
+        "certified": false
       },
       "narration": { // Narration information
         "id": 1,
@@ -401,7 +404,8 @@ and include the needed method as an extra parameter `_method`.
         "id": 4,
         "name": "AbdulKader",
         "username": "abd",
-        "avatar": null
+        "avatar": null,
+        "certified": false
       },
       "narration": { // Narration information
         "id": 1,
@@ -486,7 +490,8 @@ This end point increase the number of listeners of recitation.
     "id": 4,
     "name": "AbdulKader",
     "username": "abd",
-    "avatar": null
+    "avatar": null,
+    "certified": false
   },
   "narration": { // Narration information
     "id": 1,
@@ -566,7 +571,8 @@ This end point increase the number of listeners of recitation.
         "id": 4,
         "name": "AbdulKader",
         "username": "abd",
-        "avatar": null
+        "avatar": null,
+        "certified": false
       },
       "narration": { // Narration information
         "id": 1,
