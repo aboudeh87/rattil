@@ -10,6 +10,7 @@ use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\CommentRequest;
+use App\Transformers\V1\CommentTransformer;
 
 class CommentController extends ApiController
 {
@@ -36,6 +37,26 @@ class CommentController extends ApiController
 
             return $next($request);
         });
+    }
+
+    /**
+     * Return The comments list of a specific recitation
+     *
+     * @param Recitation $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(Recitation $model)
+    {
+        if (!$this->isAllowed($model->user_id))
+        {
+            return $this->accessDeniedResponse();
+        }
+
+        return $this->respondWithPagination(
+            $model->comments()->orderBy('created_at', 'desc')->paginate(),
+            new CommentTransformer
+        );
     }
 
     /**
