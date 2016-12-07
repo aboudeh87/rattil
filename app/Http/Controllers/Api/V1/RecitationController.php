@@ -179,6 +179,27 @@ class RecitationController extends ApiController
     }
 
     /**
+     * Add a listener to recitation
+     *
+     * @param \App\Recitation $model
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listen(Recitation $model)
+    {
+        $user_id = $this->user ? $this->user->id : null;
+
+        $listener = $model->listeners()
+            ->where('user_id', $user_id)
+            ->firstOrNew(['user_id' => $user_id]);
+
+        $listener->count++;
+        $listener->save();
+
+        return $this->respondSuccess(trans('messages.updated_success'));
+    }
+
+    /**
      * delete a specific model
      *
      * @param \App\Recitation $model
