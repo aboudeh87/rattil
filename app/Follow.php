@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Follow whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Follow whereFollowableType($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Follow whereFollowableId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Follow whereAccepted($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Follow whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Follow whereUpdatedAt($value)
  * @mixin \Eloquent

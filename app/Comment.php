@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Comment whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Comment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Comment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Comment whereUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Comment whereVerified($value)
  * @mixin \Eloquent
  */
 class Comment extends Model

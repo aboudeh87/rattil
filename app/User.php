@@ -29,6 +29,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Favorite[] $favorites
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Follow[] $following
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Follow[] $followers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\UserProperty[] $properties
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Recitation[] $recitations
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
  * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
