@@ -37,4 +37,16 @@ class FollowerTransformer extends Transformer
                 $model->recitation_count : $model->recitations()->whereDisabled(false)->count(),
         ];
     }
+
+    /**
+     * Get a key for cached model
+     *
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
+     * @return string
+     */
+    protected function cacheKey(Model $model)
+    {
+        return 'follower_' . $model->getKey() . '_' . $model->updated_at;
+    }
 }
