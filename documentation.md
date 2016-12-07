@@ -874,10 +874,9 @@ return the comments of a recitation
         "name": "abdulkader",
         "username": "abd",
         "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
-        "country": null,
-        "recitations_count": 1
+        "verified": false
       },
-      "date": 1476232607,
+      "date": 1476232607
     }
   ]
 }
