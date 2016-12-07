@@ -48,7 +48,7 @@ Route::group([
     //                    Recitations APIs                    |
     //--------------------------------------------------------|
     Route::group([
-        'prefix'     => '/recitations',
+        'prefix' => '/recitations',
     ], function ()
     {
         Route::group([
@@ -91,12 +91,16 @@ Route::group([
         ],
     ], function ()
     {
-        Route::post('/recitations/{model}/comment', 'Api\V1\CommentController@store')
+        Route::get('/recitations/{model}/comments', 'Api\V1\CommentController@index')
             ->middleware([
                 \App\Http\Middleware\DisabledRecitation::class,
                 \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
             ]);
-
+        Route::post('/recitations/{model}/comments', 'Api\V1\CommentController@store')
+            ->middleware([
+                \App\Http\Middleware\DisabledRecitation::class,
+                \App\Http\Middleware\IsAllowedToSeePrivate::class . ':api',
+            ]);
         Route::delete('/comments/{model}', 'Api\V1\CommentController@destroy')
             ->middleware([
                 \App\Http\Middleware\IsOwner::class . ':model,api',
