@@ -462,6 +462,14 @@ and include the needed method as an extra parameter `_method`.
 * Authentication ***required***
 * _response_: normal `Success response`.
 
+#### Listen Recitation
+
+This end point increase the number of listeners of recitation.
+
+* _url:_ `/recitations/{model}/listen` // `{model}` is the `ID` of recitation
+* _method_: `POST`
+* _response_: normal `Success response`.
+
 #### Show Recitation information
 
 * _url:_ `/recitations/{model}` // `{model}` is The ID of Recitation
