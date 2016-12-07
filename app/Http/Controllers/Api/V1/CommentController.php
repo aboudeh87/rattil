@@ -48,11 +48,6 @@ class CommentController extends ApiController
      */
     public function index(Recitation $model)
     {
-        if (!$this->isAllowed($model->user_id))
-        {
-            return $this->accessDeniedResponse();
-        }
-
         return $this->respondWithPagination(
             $model->comments()->orderBy('created_at', 'desc')->paginate(),
             new CommentTransformer
