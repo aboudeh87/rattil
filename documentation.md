@@ -50,6 +50,7 @@ and include the needed method as an extra parameter `_method`.
     * [Un-Favorite a recitation](#un-favorite-a-recitation)
     * [Favorites list of an user](#favorites-list-of-an-user)
 - [Comments](#comments)
+    * [Comments list](#comments-list)
     * [Add a new comment](#add-a-new-comment)
     * [Delete a comment](#delete-a-comment)
 - [Reports](#reports)
@@ -848,9 +849,43 @@ This end point increase the number of listeners of recitation.
 
 ## Comments
 
+#### Comments list
+
+return the comments of a recitation
+
+* _url:_ `/recitations/{model}/comments` // `{model}` is the `ID` of recitation
+* _method_: `GET`
+* Authentication ***required***
+* _response_: a `JSON` response like: 
+
+```json
+{
+    "total": 1,
+    "limit": 15,
+    "currentPage": 1,
+    "data": [ // Array of comments
+    {
+      "id": 1,
+      "text": "Test Comment",
+      "url": null,
+      "verified": false,
+      "user": {
+        "id": 4,
+        "name": "abdulkader",
+        "username": "abd",
+        "avatar": "http://rattil.app/public/profiles/a87ff679a2f3e71d9181a67b7542122c.jpg",
+        "country": null,
+        "recitations_count": 1
+      },
+      "date": 1476232607,
+    }
+  ]
+}
+```
+
 #### Add a new comment
 
-* _url:_ `/recitations/{model}/comment` // `{model}` is the `ID` of recitation
+* _url:_ `/recitations/{model}/comments` // `{model}` is the `ID` of recitation
 * _method_: `POST`
 * Authentication ***required***
 * _parameters_:
