@@ -57,12 +57,14 @@ class RecitationTransformer extends Transformer
             'fromVerse'      => $verseTransformer->transform($model->fromVerse),
             'toVerse'        => $verseTransformer->transform($model->toVerse),
             'date'           => $model->created_at->timestamp,
+            'verified'       => (bool) $model->verified,
             'commentsCount'  => (int) ($model->comments_count === null ?
                 $model->comments()->count() : $model->comments_count),
             'favoritesCount' => (int) ($model->favorators_count === null ?
                 $model->favorators()->count() : $model->favorators_count),
             'likesCount'     => (int) ($model->likes_count === null ?
                 $model->likes()->count() : $model->likes_count),
+            'listenersCount' => (int) $model->listeners()->sum('count'),
         ];
 
         if ($this->show === true)
