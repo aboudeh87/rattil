@@ -42,6 +42,13 @@ class Favorite extends Model
     protected $fillable = ['favoritable_type', 'favoritable_id', 'user_id'];
 
     /**
+     * The relationships that should be touched on save.
+     *
+     * @var array
+     */
+    protected $touches = ['model', 'user'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

@@ -43,6 +43,13 @@ class Listener extends Model
     protected $fillable = ['count', 'user_id'];
 
     /**
+     * The relationships that should be touched on save.
+     *
+     * @var array
+     */
+    protected $touches = ['model'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

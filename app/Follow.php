@@ -44,6 +44,13 @@ class Follow extends Model
     protected $fillable = ['followable_type', 'followable_id', 'user_id'];
 
     /**
+     * The relationships that should be touched on save.
+     *
+     * @var array
+     */
+    protected $touches = ['model', 'user'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
