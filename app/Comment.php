@@ -64,7 +64,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $touches = ['model', 'user'];
+    protected $touches = ['model'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
