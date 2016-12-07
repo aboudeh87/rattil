@@ -26,10 +26,11 @@ class UserTransformer extends Transformer
     {
         /** @var User $model */
         return [
-            'id'       => (int) $model->id,
-            'name'     => $model->name,
-            'username' => $model->username,
-            'avatar'   => $model->avatar,
+            'id'        => (int) $model->id,
+            'name'      => $model->name,
+            'username'  => $model->username,
+            'avatar'    => $model->avatar,
+            'certified' => $model->certified,
         ];
     }
 }
