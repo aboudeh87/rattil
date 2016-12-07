@@ -47,7 +47,7 @@ class Listener extends Model
      *
      * @var array
      */
-    protected $touches = ['model'];
+    protected $touches = ['recitation'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
