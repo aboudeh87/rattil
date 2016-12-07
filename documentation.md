@@ -507,9 +507,11 @@ This end point increase the number of listeners of recitation.
     "characters": "dddd"
   },
   "date": 1476232607, // Created date timestamp
+  "verified": false,
   "commentsCount": 0,
   "favoritesCount": 0,
   "likesCount": 0,
+  "listenersCount": 0,
   "description": "xxxxx",
   "url": "xxxx",
   "sura": { // Sura information
