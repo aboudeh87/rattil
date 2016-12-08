@@ -57,7 +57,7 @@ class SuraTransformer extends Transformer
             'name'               => $content ? $content->name : null,
             'verseCount'         => $model->verses_count === null ?
                 $model->verses()->count() : $model->verses_count,
-            'revealed'           => trans("labels.{$model->revealed}"),
+            'revealed'           => $model->revealed,
             'chronologicalOrder' => (int) $model->chronological_order,
         ];
 
