@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 
+use Illuminate\Validation\Rule;
+
 class StoreRecitationRequest extends Request
 {
 
@@ -23,12 +25,26 @@ class StoreRecitationRequest extends Request
      */
     public function rules()
     {
+        $sura_id = $this->get('sura_id');
+
         return [
             'description'  => 'max:255',
             'sura_id'      => 'required|exists:suwar,id',
             'narration_id' => 'required|exists:narrations,id',
-            'from_verse'   => 'required|exists:verses,id',
-            'to_verse'     => 'required|exists:verses,id',
+            'from_verse'   => [
+                'required',
+                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                {
+                    $query->where('sura_id', $sura_id);
+                }),
+            ],
+            'to_verse'     => [
+                'required',
+                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                {
+                    $query->where('sura_id', $sura_id);
+                }),
+            ],
             'file'         => 'required|file',
             'mentions'     => 'array',
             'mentions.*'   => 'exists:users,id',
