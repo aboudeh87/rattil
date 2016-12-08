@@ -18,7 +18,7 @@ class CreateVersesTable extends Migration
         {
             $table->increments('id');
             $table->integer('sura_id', false, true);
-            $table->tinyInteger('number', false, true);
+            $table->integer('number', false, true);
             $table->tinyInteger('chapter', false, true);
             $table->integer('page', false, true);
             $table->text('characters');
