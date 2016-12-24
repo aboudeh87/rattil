@@ -44,6 +44,7 @@ and include the needed method as an extra parameter `_method`.
     * [Un-Follow an user](#un-Follow-an-user)
     * [Delete a follower](#delete-a-follower)
     * [Pending requests list](#pending-requests-list)
+    * [Accept following request](#accept-following-request)
     * [The followers list of an user](#the-followers-list-of-an-user)
     * [The following list of an user](#the-following-list-of-an-user)
 - [Favorites system](#favorites-system)
@@ -724,12 +725,10 @@ This end point increase the number of listeners of recitation.
 
 Return a list of un-confirmed "following requests" of a private user.
 
-
 * _url:_ `/profiles/{model}/followers/pending` // `{model}` is the `User ID` or `username` of logged in user
 * _method_: `GET`
 * Authentication ***Required***
 * _response_: a `JSON` response like: 
-
 
 ```json
 {
@@ -750,6 +749,12 @@ Return a list of un-confirmed "following requests" of a private user.
 }
 ```
 
+#### Accept following request
+
+* _url:_ `/profiles/{model}/followers/pending/{id}` // `{model}` is the `User ID` or `username` of logged in user, {id} is the Following request ID.
+* _method_: `POST`
+* Authentication ***Required***
+* _response_: normal `Success response`.
 
 #### The followers list of an user
 
