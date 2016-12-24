@@ -132,10 +132,14 @@ class RecitationController extends ApiController
         $model->user_id = $this->user->id;
         $model->save();
 
-        $model->mentions()->sync($request->get('mentions', []));
-
         $file = $request->file('file');
-        $file->storeAs(self::PATH, $this->getFileName($model));
+        $filename = $this->getFileName($model);
+        $file->storeAs(self::PATH, $filename);
+
+        $model->url = self::PATH . $filename;
+        $model->save();
+
+        $model->mentions()->sync($request->get('mentions', []));
 
         \Event::fire(new NewRecitationPosted($model, $file));
 
