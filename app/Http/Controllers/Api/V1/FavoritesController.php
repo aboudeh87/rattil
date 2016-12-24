@@ -56,7 +56,13 @@ class FavoritesController extends ApiController
         /** @var User $user */
         $user = auth($this->guard)->user();
 
-        $model->favorators()->where(['user_id' => $user->id])->delete();
+        $favorite = $model->favorators()->where(['user_id' => $user->id])->first();
+
+        if ($favorite)
+        {
+            $favorite->save();
+            $favorite->dalete();
+        }
 
         return $this->favoriteRemovedSuccess();
     }
