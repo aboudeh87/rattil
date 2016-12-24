@@ -18,7 +18,7 @@ class ProfileController extends ApiController
 
     use ProfilesChecker, JsonResponses;
 
-    const IMAGES_PATH = '/public/profiles/';
+    const IMAGES_PATH = 'public/profiles/';
 
     /**
      * Update profile of current user
@@ -156,7 +156,7 @@ class ProfileController extends ApiController
 
             Storage::put(self::IMAGES_PATH . $filename, $image->save(), 'public');
 
-            $this->model->avatar = $request->root() . self::IMAGES_PATH . $filename;
+            $this->model->avatar = self::IMAGES_PATH . $filename;
         }
     }
 
