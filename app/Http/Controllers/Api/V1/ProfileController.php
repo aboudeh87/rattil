@@ -33,10 +33,10 @@ class ProfileController extends ApiController
         $this->model->fill(['name' => $request->get('name')]);
 
         $this->imageProcess($request);
-
         $this->model->save();
 
-        return $this->handleProfileUpdatedSuccess();
+        return $this->metadataProcess($request)
+            ->handleProfileUpdatedSuccess();
     }
 
     /**
@@ -166,6 +166,31 @@ class ProfileController extends ApiController
     protected function getAvatarName()
     {
         return md5($this->model->id) . '.jpg';
+    }
+
+    /**
+     * Save other user properties
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return $this
+     */
+    protected function metadataProcess(Request $request)
+    {
+        $rules = config('profile.rules', []);
+
+        foreach ($rules as $property => $rule)
+        {
+            $model = $this->model->properties()->where('key', $property)->firstOrNew([
+                'key' => $property,
+            ]);
+
+            $model->value = $request->get($property) ?: null;
+
+            $this->model->properties()->save($model);
+        }
+
+        return $this;
     }
 
     /**
