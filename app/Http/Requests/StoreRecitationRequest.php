@@ -45,6 +45,7 @@ class StoreRecitationRequest extends Request
                     $query->where('sura_id', $sura_id);
                 }),
             ],
+            // TODO add a validation on the type of file and add a size limit
             'file'         => 'required|file',
             'mentions'     => 'array',
             'mentions.*'   => 'exists:users,id',
