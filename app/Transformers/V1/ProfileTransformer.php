@@ -32,9 +32,9 @@ class ProfileTransformer extends Transformer
             'avatar'   => $model->avatar,
         ];
 
-        $properties = array_keys(config('profile.rules', []));
+        $properties = config('profile.rules', []);
 
-        foreach ($properties as $property)
+        foreach ($properties as $property => $rules)
         {
 
             if (in_array($property, config('profile.owner', [])) && $model->id !== auth('api')->id())
@@ -43,7 +43,9 @@ class ProfileTransformer extends Transformer
             }
 
             $propertyModel = $model->properties()->where('key', $property)->first();
-            $data[$property] = $propertyModel ? $propertyModel->value : null;
+            $data[$property] = $propertyModel ?
+                (in_array($rules, ['boolean', 'bool']) ? (bool) $propertyModel->value : $propertyModel->value)
+                : null;
         }
 
         $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
