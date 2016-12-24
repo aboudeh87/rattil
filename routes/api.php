@@ -119,7 +119,7 @@ Route::group([
         Route::post('/profiles/', 'Api\V1\ProfileController@update');
         Route::get('/profiles/{model?}', 'Api\V1\ProfileController@show');
         Route::post('/profiles/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
-        Route::delete('/profiles/{model}/avatar', 'Api\V1\ProfileController@uploadAvatar');
+        Route::delete('/profiles/{model}/avatar', 'Api\V1\ProfileController@deleteAvatar');
         Route::get('/users/search', 'Api\V1\ProfileController@search');
     });
 
