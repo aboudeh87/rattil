@@ -41,6 +41,13 @@ class UserProperty extends Model
     protected $fillable = ['value', 'key'];
 
     /**
+     * The relationships that should be touched on save.
+     *
+     * @var array
+     */
+    protected $touches = ['user'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
