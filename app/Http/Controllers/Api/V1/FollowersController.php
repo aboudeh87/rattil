@@ -65,8 +65,11 @@ class FollowersController extends ApiController
                 'followable_id'   => $model->id,
             ])->first();
 
-        $follow->save();
-        $follow->delete();
+        if ($follow)
+        {
+            $follow->save();
+            $follow->delete();
+        }
 
         return $this->handleUnFollowSuccessResponse($model);
     }
@@ -85,11 +88,17 @@ class FollowersController extends ApiController
         /** @var User $user */
         $user = auth($this->guard)->user();
 
-        $model->following()
+        $follow = $model->following()
             ->where([
                 'followable_type' => User::class,
                 'followable_id'   => $user->id,
-            ])->delete();
+            ])->first();
+
+        if ($follow)
+        {
+            $follow->save();
+            $follow->delete();
+        }
 
         return $this->handleDeleteFollowerSuccessResponse();
     }
