@@ -157,6 +157,32 @@ class FollowersController extends ApiController
     }
 
     /**
+     * Decline a following request
+     *
+     * @param int $userId
+     * @param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function decline($userId, $id)
+    {
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $follow = $user->followers()->whereId($id)->whereAccepted(false)->first();
+
+        if (!$follow)
+        {
+            return $this->respondError(trans('messages.invalid_request_id'), 404);
+        }
+
+        $follow->save();
+        $follow->delete();
+
+        return $this->respondSuccess(trans('messages.following_request_rejected'));
+    }
+
+    /**
      * Return The following users of a specific user
      *
      * @param null|string $model
