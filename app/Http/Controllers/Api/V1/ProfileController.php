@@ -54,6 +54,8 @@ class ProfileController extends ApiController
 
         $this->imageProcess($request);
 
+        $this->model->save();
+
         return $this->respondSuccess(trans('messages.avatar_uploaded_success'));
     }
 
