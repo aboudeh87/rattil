@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App;
 use App\Traits\Likable;
 use App\Traits\Commentable;
 use App\Traits\Favoritable;
@@ -11,6 +12,7 @@ use App\Contracts\CommentableContract;
 use App\Contracts\FavoritableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * App\Recitation
@@ -144,5 +146,40 @@ class Recitation extends Model implements LikableContract,
     public function toVerse()
     {
         return $this->belongsTo(Verse::class, 'to_verse');
+    }
+
+    public static function createSlug(self $model, $timestamp = false)
+    {
+        $content = $model->sura->content()->where('language_key', App::getLocale())->first() ?:
+            $model->sura->content()->first();
+
+        return Str::slug(
+            "{$model->user_id} {$content->name} {$model->from_verse} {$model->to_verse}" .
+            ($timestamp ? date('d m Y H i') : ''),
+            '_'
+        );
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $model)
+        {
+
+            $slug = self::createSlug($model);
+
+            while (self::whereSlug($slug)->count())
+            {
+                $slug = self::createSlug($model);
+            }
+
+            $model->slug = $slug;
+        });
     }
 }
