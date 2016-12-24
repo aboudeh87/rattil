@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\User;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
+use App\Transformers\V1\UserTransformer;
 use App\Transformers\V1\FollowerTransformer;
 
 class FollowersController extends ApiController
@@ -101,6 +102,29 @@ class FollowersController extends ApiController
         }
 
         return $this->handleDeleteFollowerSuccessResponse();
+    }
+
+    /**
+     * Return the list of pending following requests
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pending()
+    {
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $ids = $user->followers()
+            ->whereAccepted(false)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->pluck('user_id')
+            ->toArray();
+
+        return $this->respondWithPagination(
+            User::whereIn('id', $ids)->orderByRaw(\DB::raw("FIELD(id," . implode(',', $ids) . ")"))->paginate(),
+            new UserTransformer
+        );
     }
 
     /**
