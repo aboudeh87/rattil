@@ -45,6 +45,7 @@ and include the needed method as an extra parameter `_method`.
     * [Delete a follower](#delete-a-follower)
     * [Pending requests list](#pending-requests-list)
     * [Accept following request](#accept-following-request)
+    * [Decline following request](#decline-following-request)
     * [The followers list of an user](#the-followers-list-of-an-user)
     * [The following list of an user](#the-following-list-of-an-user)
 - [Favorites system](#favorites-system)
@@ -753,6 +754,13 @@ Return a list of un-confirmed "following requests" of a private user.
 
 * _url:_ `/profiles/{model}/followers/pending/{id}` // `{model}` is the `User ID` or `username` of logged in user, {id} is the Following request ID.
 * _method_: `POST`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+#### Decline following request
+
+* _url:_ `/profiles/{model}/followers/pending/{id}` // `{model}` is the `User ID` or `username` of logged in user, {id} is the Following request ID.
+* _method_: `DELETE`
 * Authentication ***Required***
 * _response_: normal `Success response`.
 
