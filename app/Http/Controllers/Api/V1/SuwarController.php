@@ -16,7 +16,7 @@ class SuwarController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPagination(Sura::paginate(), new SuraTransformer);
+        return $this->respond((new SuraTransformer)->transform(Sura::all())->toArray());
     }
 
     /**
