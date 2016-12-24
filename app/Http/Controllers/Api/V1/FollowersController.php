@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 
+use App\Follow;
 use App\User;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
@@ -114,7 +115,6 @@ class FollowersController extends ApiController
         /** @var User $user */
         $user = auth($this->guard)->user();
 
-
         return $this->respondWithPagination(
             $user->followers()
                 ->with('user')
@@ -123,6 +123,37 @@ class FollowersController extends ApiController
                 ->paginate(),
             new PendingRequestTransformer
         );
+    }
+
+    /**
+     * Accept a following request
+     *
+     * @param int $userId
+     * @param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function accept($userId, $id)
+    {
+        /** @var User $user */
+        $user = auth($this->guard)->user();
+
+        $follow = $user->followers()->whereId($id)->first();
+
+        if (!$follow)
+        {
+            return $this->respondError(trans('messages.invalid_request_id'), 404);
+        }
+
+        if ($follow->accepted)
+        {
+            return $this->respondError(trans('messages.already_accepted'));
+        }
+
+        $follow->accepted = true;
+        $follow->save();
+
+        return $this->respondSuccess(trans('messages.following_request_accepted'));
     }
 
     /**
