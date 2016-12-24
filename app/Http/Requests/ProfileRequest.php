@@ -23,6 +23,6 @@ class ProfileRequest extends Request
      */
     public function rules()
     {
-        return array_merge(['name' => 'required|max:255', 'image' => 'image'], config('profile.rules', []));
+        return array_merge(['name' => 'required|max:255', 'image' => 'image|max:2048'], config('profile.rules', []));
     }
 }
