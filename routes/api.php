@@ -139,6 +139,7 @@ Route::group([
         Route::get('/profiles/{model}/following', 'Api\V1\FollowersController@following');
         Route::get('/profiles/{model}/followers/pending', 'Api\V1\FollowersController@pending');
         Route::post('/profiles/{model}/followers/pending/{id}', 'Api\V1\FollowersController@accept');
+        Route::delete('/profiles/{model}/followers/pending/{id}', 'Api\V1\FollowersController@decline');
     });
 
     //--------------------------------------------------------|
