@@ -182,25 +182,20 @@ and include the needed method as an extra parameter `_method`.
 * _response_: a `JSON` response with pagination like:
 
 ```json
-{
-    "total": 2, // total number of suwar models
-    "limit": 15, // limit per page
-    "currentPage": 1, // current page number
-    "data": [   // arrau of models
-        {
-            "id": 1, // ID of sura
-            "name": "test", // name of sura
-            "revealed": "medinan",
-            "chronologicalOrder": 1
-        },
-        {
-            "id": 2,
-            "name": "Test 2",
-            "revealed": "medinan",
-            "chronologicalOrder": 3
-        }
-    ] 
-}
+[   // arrau of models
+    {
+        "id": 1, // ID of sura
+        "name": "test", // name of sura
+        "revealed": "medinan",
+        "chronologicalOrder": 1
+    },
+    {
+        "id": 2,
+        "name": "Test 2",
+        "revealed": "medinan",
+        "chronologicalOrder": 3
+    }
+]
 ```
 
 #### Show Sura information
