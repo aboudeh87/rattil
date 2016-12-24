@@ -41,7 +41,7 @@ class Follow extends Model
      *
      * @var array
      */
-    protected $fillable = ['followable_type', 'followable_id', 'user_id'];
+    protected $fillable = ['followable_type', 'followable_id', 'user_id', 'accepted'];
 
     /**
      * The relationships that should be touched on save.
