@@ -135,8 +135,8 @@ Route::group([
         Route::post('/follows/{model}', 'Api\V1\FollowersController@follow');
         Route::delete('/follows/{model}', 'Api\V1\FollowersController@unfollow');
         Route::delete('/follows/{model}/follower', 'Api\V1\FollowersController@deleteFollower');
-        Route::get('/profiles/{model}/pending', 'Api\V1\FollowersController@pending');
         Route::get('/profiles/{model}/followers', 'Api\V1\FollowersController@followers');
+        Route::get('/profiles/{model}/followers/pending', 'Api\V1\FollowersController@pending');
         Route::get('/profiles/{model}/following', 'Api\V1\FollowersController@following');
     });
 
