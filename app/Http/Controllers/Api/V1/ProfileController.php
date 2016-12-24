@@ -67,10 +67,14 @@ class ProfileController extends ApiController
     public function deleteAvatar()
     {
         $this->model = auth($this->guard)->user();
+
+        if($this->model->avatar)
+        {
+            Storage::delete($this->model->avatar);
+        }
+
         $this->model->avatar = null;
         $this->model->save();
-
-        Storage::delete(self::IMAGES_PATH . $this->getAvatarName());
 
         return $this->respondSuccess(trans('messages.avatar_deleted_success'));
     }
@@ -151,7 +155,7 @@ class ProfileController extends ApiController
 
             if ($this->model->avatar)
             {
-                Storage::delete(self::IMAGES_PATH . $filename);
+                Storage::delete($this->model->avatar);
             }
 
             Storage::put(self::IMAGES_PATH . $filename, $image->save(), 'public');
