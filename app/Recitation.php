@@ -148,14 +148,14 @@ class Recitation extends Model implements LikableContract,
         return $this->belongsTo(Verse::class, 'to_verse');
     }
 
-    public static function createSlug(self $model, $timestamp = false)
+    public static function createSlug(self &$model, $timestamp = false)
     {
         $content = $model->sura->content()->where('language_key', App::getLocale())->first() ?:
             $model->sura->content()->first();
 
         return Str::slug(
             "{$model->user_id} {$content->name} {$model->from_verse} {$model->to_verse}" .
-            ($timestamp ? date('d m Y H i') : ''),
+            ($timestamp ? date(' d m Y H i') : ''),
             '_'
         );
     }
@@ -173,10 +173,13 @@ class Recitation extends Model implements LikableContract,
         {
 
             $slug = self::createSlug($model);
+            $exists = (bool) self::whereSlug($slug)->count();
 
-            while (self::whereSlug($slug)->count())
+            while ($exists === true)
             {
-                $slug = self::createSlug($model);
+                $slug = self::createSlug($model, true);
+
+                $exists = (bool) self::whereSlug($slug)->count();
             }
 
             $model->slug = $slug;
