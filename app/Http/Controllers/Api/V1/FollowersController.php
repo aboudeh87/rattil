@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\User;
 use App\Traits\JsonResponses;
 use App\Traits\ProfilesChecker;
-use App\Transformers\V1\UserTransformer;
 use App\Transformers\V1\FollowerTransformer;
+use App\Transformers\V1\PendingRequestTransformer;
 
 class FollowersController extends ApiController
 {
@@ -114,16 +114,14 @@ class FollowersController extends ApiController
         /** @var User $user */
         $user = auth($this->guard)->user();
 
-        $ids = $user->followers()
-            ->whereAccepted(false)
-            ->orderBy('created_at', 'desc')
-            ->get()
-            ->pluck('user_id')
-            ->toArray();
 
         return $this->respondWithPagination(
-            User::whereIn('id', $ids)->orderByRaw(\DB::raw("FIELD(id," . implode(',', $ids) . ")"))->paginate(),
-            new UserTransformer
+            $user->followers()
+                ->with('user')
+                ->whereAccepted(false)
+                ->orderBy('created_at', 'desc')
+                ->paginate(),
+            new PendingRequestTransformer
         );
     }
 
