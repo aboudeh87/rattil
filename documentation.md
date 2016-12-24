@@ -43,6 +43,7 @@ and include the needed method as an extra parameter `_method`.
     * [Follow an user](#follow-an-user)
     * [Un-Follow an user](#un-Follow-an-user)
     * [Delete a follower](#delete-a-follower)
+    * [Pending requests list](#pending-requests-list)
     * [The followers list of an user](#the-followers-list-of-an-user)
     * [The following list of an user](#the-following-list-of-an-user)
 - [Favorites system](#favorites-system)
@@ -718,6 +719,36 @@ This end point increase the number of listeners of recitation.
 * _method_: `DELETE`
 * Authentication ***Required***
 * _response_: normal `Success response`.
+
+#### Pending requests list
+
+Return a list of un-confirmed "following requests" of a private user.
+
+
+* _url:_ `/profiles/{model}/followers/pending` // `{model}` is the `User ID` or `username` of logged in user
+* _method_: `GET`
+* Authentication ***Required***
+* _response_: a `JSON` response like: 
+
+
+```json
+{
+  "total": 1,
+  "limit": 15,
+  "currentPage": 1,
+  "data": [
+    {
+      "id": 7, // the request ID
+      "user_id": 2, // the user ID
+      "name": "Mohammad",
+      "username": "mhd",
+      "avatar": null,
+      "certified": 0,
+      "date": 1482620154 // request date
+    }
+  ]
+}
+```
 
 
 #### The followers list of an user
