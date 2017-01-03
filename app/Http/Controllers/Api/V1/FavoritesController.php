@@ -28,6 +28,11 @@ class FavoritesController extends ApiController
             return $this->respondError(trans('messages.recitation_removed'));
         }
 
+        if (!$this->isAllowed($model->user_id))
+        {
+            return $this->accessDeniedResponse();
+        }
+
         /** @var User $user */
         $user = auth($this->guard)->user();
 
