@@ -664,7 +664,8 @@ This end point increase the number of listeners of recitation.
     "gender": "male",
     "email_notification": 1, // This variable will return only if the profile is for logged in user
     "private": 0, // This variable will return only if the profile is for logged in user
-    "followers_count": 0, 
+    "followed": 0, // 0 = Not followed, -1 = Pending acceptance, 1 = followed
+    "followers_count": 0,
     "following_count": 0,
     "favorites_count": 0,
     "recitations_count": 0
