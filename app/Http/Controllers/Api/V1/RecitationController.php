@@ -110,15 +110,33 @@ class RecitationController extends ApiController
     /**
      * Return list of popular recitations
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function popular()
+    public function popular(Request $request)
     {
+        $sort = $request->get('sort', 'likes');
+
+        switch ($sort)
+        {
+            case 'comments':
+                $sort_field = 'comments_count';
+                break;
+            case 'favorites':
+                $sort_field = 'favorators_count';
+                break;
+            case 'likes':
+            default:
+                $sort_field = 'likes_count';
+                break;
+        }
+
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
                 ->whereDisabled(false)
                 ->whereNotin('user_id', $this->getPrivateUserIds())
-                ->orderBy('likes_count', 'desc')
+                ->orderBy($sort_field, 'desc')
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
             new RecitationTransformer
