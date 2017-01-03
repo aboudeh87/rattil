@@ -143,6 +143,19 @@ Route::group([
     });
 
     //--------------------------------------------------------|
+    //                       Likes APIs                       |
+    //--------------------------------------------------------|
+    Route::group([
+        'middleware' => [
+            'auth:api',
+        ],
+    ], function ()
+    {
+        Route::post('/likes/recitation/{model}', 'Api\V1\LikesController@like');
+        Route::delete('/likes/recitation/{model}', 'Api\V1\LikesController@unlike');
+    });
+
+    //--------------------------------------------------------|
     //                     Favorites APIs                     |
     //--------------------------------------------------------|
     Route::group([
