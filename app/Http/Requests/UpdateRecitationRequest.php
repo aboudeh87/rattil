@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 
+use Illuminate\Validation\Rule;
+
 class UpdateRecitationRequest extends Request
 {
 
@@ -26,9 +28,25 @@ class UpdateRecitationRequest extends Request
     public function rules()
     {
         return [
-            'description' => 'max:255',
-            'mentions'    => 'array',
-            'mentions.*'  => 'exists:users,id',
+            'description'  => 'max:255',
+            'sura_id'      => 'required|exists:suwar,id',
+            'narration_id' => 'required|exists:narrations,id',
+            'from_verse'   => [
+                'required',
+                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                {
+                    $query->where('sura_id', $sura_id);
+                }),
+            ],
+            'to_verse'     => [
+                'required',
+                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                {
+                    $query->where('sura_id', $sura_id);
+                }),
+            ],
+            'mentions'     => 'array',
+            'mentions.*'   => 'exists:users,id',
         ];
     }
 }
