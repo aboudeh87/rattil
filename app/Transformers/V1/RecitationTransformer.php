@@ -24,15 +24,36 @@ class RecitationTransformer extends Transformer
     protected $show = false;
 
     /**
-     * Set shoe property
+     * Show all information
      *
-     * @param $show
+     * @var bool
+     */
+    protected $verses = false;
+
+    /**
+     * Set show property
+     *
+     * @param bool $show
      *
      * @return $this
      */
     public function setShow($show)
     {
         $this->show = (bool) $show;
+
+        return $this;
+    }
+
+    /**
+     * Set verses property
+     *
+     * @param bool $verses
+     *
+     * @return $this
+     */
+    public function setVerses($verses)
+    {
+        $this->verses = (bool) $verses;
 
         return $this;
     }
@@ -74,16 +95,20 @@ class RecitationTransformer extends Transformer
             $data['length'] = $model->length;
             $data['sura'] = (new SuraTransformer)->transform($model->sura);
             $data['mentions'] = (new UserTransformer)->transform($model->mentions);
-            $data['verses'] = $verseTransformer->transform(
-                $model->sura
-                    ->verses()
-                    ->whereBetween('number', [
-                        $model->fromVerse->number,
-                        $model->toVerse->number,
-                    ])
-                    ->orderBy('number', 'asc')
-                    ->get()
-            );
+
+            if ($this->verses === true)
+            {
+                $data['verses'] = $verseTransformer->transform(
+                    $model->sura
+                        ->verses()
+                        ->whereBetween('number', [
+                            $model->fromVerse->number,
+                            $model->toVerse->number,
+                        ])
+                        ->orderBy('number', 'asc')
+                        ->get()
+                );
+            }
         }
 
         return $data;
@@ -98,6 +123,6 @@ class RecitationTransformer extends Transformer
      */
     protected function cacheKey(Model $model)
     {
-        return get_class($model) . '_' . $model->getKey() . '_' . \App::getLocale() . '_' . $this->show . '_' . $model->updated_at;
+        return get_class($model) . '_' . $model->getKey() . '_' . \App::getLocale() . '_' . $this->show . '_' . $this->verses . '_' . $model->updated_at;
     }
 }
