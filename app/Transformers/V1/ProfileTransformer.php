@@ -55,7 +55,7 @@ class ProfileTransformer extends Transformer
         {
             $followed = $model->followers()->where('user_id', auth('api')->id())->first();
 
-            $data['followed'] = (!$followed ? 0 : ($followed && $followed->accepted ? 1 : -1));
+            $data['followed'] = (!$followed ? 0 : ($followed && $followed->accepted ? 1 : 2));
         }
 
         $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
