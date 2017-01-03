@@ -390,6 +390,8 @@ and include the needed method as an extra parameter `_method`.
 
 * _url:_ `/recitations/popular`
 * _method_: `GET`
+* _parameters_:
+    * `sort` ***optional*** // can be [`likes`|`comments`|`favorites`] default is `likes`.
 * Authentication ***Required***
 * _response_: a `JSON` response pagination like:
 
