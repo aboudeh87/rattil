@@ -33,16 +33,16 @@ class UpdateRecitationRequest extends Request
             'narration_id' => 'required|exists:narrations,id',
             'from_verse'   => [
                 'required',
-                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                Rule::exists('verses', 'id')->where(function ($query)
                 {
-                    $query->where('sura_id', $sura_id);
+                    $query->where('sura_id', $this->get('sura_id'));
                 }),
             ],
             'to_verse'     => [
                 'required',
-                Rule::exists('verses', 'id')->where(function ($query) use ($sura_id)
+                Rule::exists('verses', 'id')->where(function ($query)
                 {
-                    $query->where('sura_id', $sura_id);
+                    $query->where('sura_id', $this->get('sura_id'));
                 }),
             ],
             'mentions'     => 'array',
