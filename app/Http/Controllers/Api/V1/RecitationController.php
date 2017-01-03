@@ -127,7 +127,6 @@ class RecitationController extends ApiController
      */
     public function store(StoreRecitationRequest $request)
     {
-
         $model = new Recitation($request->all());
         $model->user_id = $this->user->id;
         $model->save();
@@ -156,7 +155,14 @@ class RecitationController extends ApiController
      */
     public function update(UpdateRecitationRequest $request, Recitation $model)
     {
-        $model->description = $request->get('description', null);
+        $model->fill($request->only([
+            'description',
+            'sura_id',
+            'narration_id',
+            'from_verse',
+            'to_verse',
+        ]));
+
         $model->save();
 
         $model->mentions()->sync($request->get('mentions', []));
