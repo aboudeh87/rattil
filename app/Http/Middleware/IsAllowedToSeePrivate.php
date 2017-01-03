@@ -21,6 +21,12 @@ class IsAllowedToSeePrivate
     public function handle($request, Closure $next, $guard = null)
     {
         $model = $request->route()->parameter('model');
+
+        if (auth($guard)->id() === $model->user_id)
+        {
+            return $next($request);
+        }
+
         $private = $model->user->properties()->where('key', 'private')->first();
         $isFollower = $model->user
             ->followers()
