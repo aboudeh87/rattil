@@ -75,7 +75,14 @@ class RecitationController extends ApiController
     {
         return $this->respondWithPagination(
             Recitation::withCount('comments', 'favorators', 'likes')
-                ->whereIn('user_id', $this->user->following()->whereAccepted(true)->pluck('id')->toArray())
+                ->whereIn(
+                    'user_id',
+                    $this->user->following()
+                        ->whereAccepted(true)
+                        ->get(['id'])
+                        ->pluck('id')
+                        ->toArray()
+                )
                 ->whereDisabled(false)
                 ->orderBy('created_at', 'desc')
                 ->paginate(),
