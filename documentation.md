@@ -458,6 +458,10 @@ and include the needed method as an extra parameter `_method`.
 * _method_: `POST`
 * Authentication ***required***
 * _parameters_:
+    * `sura_id` ***required*** // The ID of recited Sura
+    * `narration_id` ***required*** // The ID of recite's narration
+    * `from_verse` ***required*** // ID of start verse
+    * `to_verse` ***required*** // ID of end verse
     * `description` ***optional*** // The comment on the recitation
     * `mentions` ***optional*** // should be array of users IDs That mentioned in the post
 * _response_: normal `Success response`.
