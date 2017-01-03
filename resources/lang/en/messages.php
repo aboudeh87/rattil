@@ -10,6 +10,7 @@ return [
     'avatar_uploaded_success'        => 'Your new profile image uploaded successfully.',
     'avatar_deleted_success'         => 'Your profile image deleted successfully.',
     'user_followed_success'          => ':name followed successfully.',
+    'pending_acceptance'             => 'Pending acceptance.',
     'user_unfollowed_success'        => ':name un-followed successfully.',
     'follower_deleted_success'       => 'The follower deleted successfully.',
     'invalid_request_id'             => 'Invalid request ID!',

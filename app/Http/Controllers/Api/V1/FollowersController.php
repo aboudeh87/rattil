@@ -28,6 +28,7 @@ class FollowersController extends ApiController
 
         /** @var User $user */
         $user = auth($this->guard)->user();
+        $private = false;
 
         if (
         !$user->following()
@@ -36,15 +37,16 @@ class FollowersController extends ApiController
         )
         {
             $private = $model->properties()->whereKey('private')->first();
+            $private = $private && $private->value ? true : false;
 
             $user->following()->create([
                 'followable_type' => User::class,
                 'followable_id'   => $model->id,
-                'accepted'        => $private && $private->value ? false : true,
+                'accepted'        => $private ? false : true,
             ]);
         }
 
-        return $this->handleFollowSuccessResponse($model);
+        return $this->handleFollowSuccessResponse($model, $private);
     }
 
     /**
@@ -255,13 +257,15 @@ class FollowersController extends ApiController
      * return success response after following an user
      *
      * @param \App\User $model
+     * @param bool      $private
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function handleFollowSuccessResponse(User $model)
+    protected function handleFollowSuccessResponse(User $model, $private)
     {
         return $this->respondSuccess(
-            trans('messages.user_followed_success', ['name' => $model->name])
+            !$private ? trans('messages.user_followed_success', ['name' => $model->name]) :
+                trans('messages.pending_acceptance')
         );
     }
 
