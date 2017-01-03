@@ -10,7 +10,7 @@ use App\Narration;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class MigratrOldData extends Command
+class MigrateOldData extends Command
 {
 
     /**
