@@ -43,9 +43,12 @@ class ProfileTransformer extends Transformer
             }
 
             $propertyModel = $model->properties()->where('key', $property)->first();
-            $data[$property] = $propertyModel ?
-                (in_array($rules, ['boolean', 'bool']) ? (bool) $propertyModel->value : $propertyModel->value)
-                : null;
+            $data[$property] = $propertyModel ? $propertyModel->value : null;
+
+            if (in_array($rules, ['boolean', 'bool']))
+            {
+                $data[$property] = (bool) $data[$property];
+            }
         }
 
         $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
