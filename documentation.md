@@ -48,6 +48,9 @@ and include the needed method as an extra parameter `_method`.
     * [Decline following request](#decline-following-request)
     * [The followers list of an user](#the-followers-list-of-an-user)
     * [The following list of an user](#the-following-list-of-an-user)
+- [Likes system](#likes-system)
+    * [Like a recitation](#like-a-recitation)
+    * [Un-Like a recitation](#un-like-a-recitation)
 - [Favorites system](#favorites-system)
     * [Favorite a recitation](#favorite-a-recitation)
     * [Un-Favorite a recitation](#un-favorite-a-recitation)
@@ -816,7 +819,24 @@ Return a list of un-confirmed "following requests" of a private user.
 
 ---
 
-## Favorites system 
+## Likes system
+
+#### Like a recitation
+
+* _url:_ `/likes/recitation/{model}` // `{model}` is the `ID` of recitation
+* _method_: `POST`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+#### Un-Like a recitation
+
+* _url:_ `/likes/recitation/{model}` // `{model}` is the `ID` of recitation
+* _method_: `DELETE`
+* Authentication ***Required***
+* _response_: normal `Success response`.
+
+
+## Favorites system
 
 #### Favorite a recitation
 
