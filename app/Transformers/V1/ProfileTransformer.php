@@ -51,6 +51,13 @@ class ProfileTransformer extends Transformer
             }
         }
 
+        if (auth('api')->id() !== $model->id)
+        {
+            $followed = $model->followers()->where('user_id', auth('api')->id())->first();
+
+            $data['followed'] = (!$followed ? 0 : ($followed && $followed->accepted ? 1 : -1));
+        }
+
         $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
         $data['following_count'] = $model->following()->whereAccepted(true)->count();
         $data['favorites_count'] = $model->favorites()->count();
