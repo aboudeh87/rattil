@@ -61,7 +61,7 @@ class FavoritesController extends ApiController
         if ($favorite)
         {
             $favorite->save();
-            $favorite->dalete();
+            $favorite->delete();
         }
 
         return $this->favoriteRemovedSuccess();

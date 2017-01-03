@@ -61,7 +61,7 @@ class LikesController extends ApiController
         if ($like)
         {
             $like->save();
-            $like->dalete();
+            $like->delete();
         }
 
         return $this->unlikeSuccess();
