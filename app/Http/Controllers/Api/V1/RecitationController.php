@@ -79,8 +79,9 @@ class RecitationController extends ApiController
                     'user_id',
                     $this->user->following()
                         ->whereAccepted(true)
-                        ->get(['id'])
-                        ->pluck('id')
+                        ->where('followable_type', User::class)
+                        ->get(['followable_id'])
+                        ->pluck('followable_id')
                         ->toArray()
                 )
                 ->whereDisabled(false)
