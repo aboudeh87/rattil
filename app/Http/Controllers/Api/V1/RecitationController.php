@@ -50,7 +50,7 @@ class RecitationController extends ApiController
      */
     public function recitations($model = null)
     {
-        if (!$this->isAllowed($model))
+        if (! $this->isAllowed($model))
         {
             return $this->accessDeniedResponse();
         }
@@ -209,7 +209,9 @@ class RecitationController extends ApiController
     {
         return $this->respond(
             (new RecitationTransformer)->setShow(true)->transform(
-                $model->withCount('comments', 'favorators', 'likes')->first()
+                $model->withCount('comments', 'favorators', 'likes')
+                    ->whereId($model->id)
+                    ->first()
             )
         );
     }
@@ -266,12 +268,12 @@ class RecitationController extends ApiController
         $narrations = $request->get('narration_id', []);
         $keyword = $request->get('keyword', null);
 
-        if ($suwar && !is_array($suwar))
+        if ($suwar && ! is_array($suwar))
         {
             $suwar = explode(',', $suwar);
         }
 
-        if ($narrations && !is_array($narrations))
+        if ($narrations && ! is_array($narrations))
         {
             $narrations = explode(',', $narrations);
         }
