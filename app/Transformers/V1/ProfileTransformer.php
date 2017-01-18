@@ -16,6 +16,19 @@ class ProfileTransformer extends Transformer
 {
 
     /**
+     * @var \App\User|null
+     */
+    protected $user;
+
+    /**
+     * ProfileTransformer constructor.
+     */
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
+
+    /**
      * Transform single item
      *
      * @param \Illuminate\Database\Eloquent\Model $model
@@ -51,11 +64,11 @@ class ProfileTransformer extends Transformer
             }
         }
 
-        if (auth('api')->id() !== $model->id)
+        if ($this->user && $this->user->id !== $model->id)
         {
-            $followed = $model->followers()->where('user_id', auth('api')->id())->first();
+            $followed = $model->followers()->where('user_id', $this->user->id)->first();
 
-            $data['followed'] = (!$followed ? 0 : ($followed && $followed->accepted ? 1 : 2));
+            $data['followed'] = (! $followed ? 0 : ($followed && $followed->accepted ? 1 : 2));
         }
 
         $data['followers_count'] = $model->followers()->whereAccepted(true)->count();
@@ -75,6 +88,6 @@ class ProfileTransformer extends Transformer
      */
     protected function cacheKey(Model $model)
     {
-        return 'profile_' . $model->getKey() . '_' . ($model->getKey() === auth('api')->id()) . '_' . $model->updated_at;
+        return 'profile_' . $model->getKey() . '_' . ($this->user ? $this->user->id : '') . '_' . $model->updated_at;
     }
 }
