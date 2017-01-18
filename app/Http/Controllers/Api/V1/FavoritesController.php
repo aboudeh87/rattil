@@ -28,7 +28,7 @@ class FavoritesController extends ApiController
             return $this->respondError(trans('messages.recitation_removed'));
         }
 
-        if (!$this->isAllowed($model->user_id))
+        if (! $this->isAllowed($model->user_id))
         {
             return $this->accessDeniedResponse();
         }
@@ -36,7 +36,7 @@ class FavoritesController extends ApiController
         /** @var User $user */
         $user = auth($this->guard)->user();
 
-        if (!$model->favorators()->where('user_id', $user->id)->count())
+        if (! $model->favorators()->where('user_id', $user->id)->count())
         {
             $model->favorators()->create(['user_id' => $user->id]);
         }
@@ -81,7 +81,7 @@ class FavoritesController extends ApiController
      */
     public function favorites($model = null)
     {
-        if (!$this->isAllowed($model))
+        if (! $this->isAllowed($model))
         {
             return $this->accessDeniedResponse();
         }
@@ -92,8 +92,8 @@ class FavoritesController extends ApiController
                 $this->model
                     ->favorites()
                     ->where('favoritable_type', Recitation::class)
-                    ->get()
-                    ->pluck('id')
+                    ->get(['favoritable_id'])
+                    ->pluck('favoritable_id')
                     ->toArray()
             )->paginate(),
             new RecitationTransformer
