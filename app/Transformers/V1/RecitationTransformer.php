@@ -31,6 +31,19 @@ class RecitationTransformer extends Transformer
     protected $verses = false;
 
     /**
+     * @var \App\User|null
+     */
+    protected $user;
+
+    /**
+     * RecitationTransformer constructor.
+     */
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
+
+    /**
      * Set show property
      *
      * @param bool $show
@@ -88,6 +101,12 @@ class RecitationTransformer extends Transformer
             'listenersCount' => (int) $model->listeners()->sum('count'),
         ];
 
+        if ($this->user)
+        {
+            $data['isLiked'] = (bool) $model->likes()->where('user_id', $this->user->id)->count();
+            $data['isFavorite'] = (bool) $model->favorators()->where('user_id', $this->user->id)->count();
+        }
+
         if ($this->show === true)
         {
             $data['description'] = $model->description;
@@ -123,6 +142,6 @@ class RecitationTransformer extends Transformer
      */
     protected function cacheKey(Model $model)
     {
-        return get_class($model) . '_' . $model->getKey() . '_' . \App::getLocale() . '_' . $this->show . '_' . $this->verses . '_' . $model->updated_at;
+        return get_class($model) . '_' . $model->getKey() . '_' . \App::getLocale() . '_' . ($this->user ? $this->user->id : '') . '_' . $this->show . '_' . $this->verses . '_' . $model->updated_at;
     }
 }
